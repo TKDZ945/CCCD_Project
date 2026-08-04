@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6B4E90">
+<title>Pediatric Dentist in Walnut Creek, CA | Contra Costa Children's Dentistry</title>
+<meta name="description" content="Contra Costa Children's Dentistry offers gentle, family-focused pediatric dental care in Walnut Creek, CA — first visits, preventive care, restorative treatment, and special needs dentistry.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.contracostachildrensdentistry.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Contra Costa Children's Dentistry">
+<meta property="og:title" content="Pediatric Dentist in Walnut Creek, CA | Contra Costa Children's Dentistry">
+<meta property="og:description" content="Gentle, family-focused pediatric dental care in Walnut Creek, CA — first visits, preventive care, restorative treatment, and special needs dentistry.">
+<meta property="og:url" content="https://www.contracostachildrensdentistry.com/">
+<meta property="og:image" content="https://www.contracostachildrensdentistry.com/wp/wp-content/uploads/2016/06/cccd_logo.png">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pediatric Dentist in Walnut Creek, CA | Contra Costa Children's Dentistry">
+<meta name="twitter:description" content="Gentle, family-focused pediatric dental care in Walnut Creek, CA — first visits, preventive care, restorative treatment, and special needs dentistry.">
+
+<!-- Local business structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  "name": "Contra Costa Children's Dentistry",
+  "url": "https://www.contracostachildrensdentistry.com/",
+  "telephone": "+1-925-482-6223",
+  "faxNumber": "+1-925-357-3777",
+  "email": "smile@ContraCostaChildrensDentistry.com",
+  "sameAs": ["https://www.instagram.com/cccdentistry/"],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "355 Lennon Ln, #215",
+    "addressLocality": "Walnut Creek",
+    "addressRegion": "CA",
+    "postalCode": "94598",
+    "addressCountry": "US"
+  },
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "12:00"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "13:00", "closes": "17:00"}
+  ],
+  "medicalSpecialty": "Pediatric Dentistry",
+  "priceRange": "$$"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F2FA;
+    --surface:#FFFFFF;
+    --ink:#3B2E52;
+    --ink-soft:#6E6383;
+    --primary:#967BB6;
+    --primary-dark:#6B4E90;
+    --accent:#CCCCFF;
+    --accent-dark:#A6A6E8;
+    --sun:#FFC857;
+    --line:#DED8F0;
+    --mint:#E9E6F8;
+    --radius:20px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Plus Jakarta Sans', sans-serif; font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Fredoka', sans-serif; font-weight:600; color:var(--primary-dark); margin:0;}
+  .eyebrow{
+    font-family:'Space Mono', monospace; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--primary); font-weight:700;
+  }
+  a{color:inherit;}
+  img.ph{width:100%; height:auto; object-fit:contain; display:block; cursor:zoom-in;}
+  .photo:has(img){background:var(--mint); padding:6px; aspect-ratio:auto !important; height:auto !important; align-items:stretch;}
+
+  /* ---------- Lightbox ---------- */
+  .lightbox{
+    position:fixed; inset:0; background:rgba(59,46,82,.86); backdrop-filter:blur(3px);
+    display:none; align-items:center; justify-content:center; z-index:200; padding:40px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:100%; max-height:100%; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.4);}
+  .lightbox-close{
+    position:absolute; top:22px; right:28px; width:44px; height:44px; border-radius:50%;
+    background:var(--surface); border:none; color:var(--primary-dark); font-size:1.4rem; font-weight:800;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .lightbox-caption{
+    position:absolute; bottom:26px; left:50%; transform:translateX(-50%); color:#fff;
+    font-family:'Space Mono',monospace; font-size:.8rem; text-align:center; max-width:80%;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+  button{font-family:inherit; cursor:pointer;}
+
+  /* ---------- Placeholder photo blocks ---------- */
+  .photo{
+    position:relative; border-radius:16px; overflow:hidden; background:
+      repeating-linear-gradient(135deg, #EDE9F7, #EDE9F7 10px, #E1DAF2 10px, #E1DAF2 20px);
+    display:flex; align-items:flex-end; min-height:120px; border:1px solid var(--line);
+  }
+  .photo .tag{
+    background:rgba(107,78,144,.88); color:#fff; font-family:'Space Mono',monospace; font-size:.68rem;
+    padding:6px 10px; margin:10px; border-radius:8px; line-height:1.35; max-width:calc(100% - 20px);
+  }
+
+  /* ---------- Top nav ---------- */
+  header.site{position:sticky; top:0; z-index:50; background:rgba(245,242,250,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  .nav-row{display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:1180px; margin:0 auto; gap:16px;}
+  .logo{font-family:'Fredoka'; font-weight:700; font-size:1.35rem; color:var(--primary-dark); display:flex; align-items:center; gap:8px; white-space:nowrap;}
+  .logo svg{flex:none;}
+  nav.tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;}
+  nav.tabs a{
+    font-weight:700; font-size:.86rem; padding:9px 16px; border-radius:12px; border:2px solid var(--primary-dark);
+    text-decoration:none; color:var(--primary-dark); background:var(--surface); transition:.15s;
+  }
+  nav.tabs a:hover, nav.tabs a.active{background:var(--primary-dark); color:#fff;}
+  nav.tabs a:focus-visible, a:focus-visible, button:focus-visible{outline:3px solid var(--accent); outline-offset:2px;}
+
+  /* ---------- Page sections ---------- */
+  section.page{padding:64px 0 88px; scroll-margin-top:84px;}
+  section.page.alt{background:var(--surface);}
+  .page-kicker{text-align:center; margin-bottom:36px;}
+  .page-kicker h2{font-size:2rem;}
+
+  /* ===== PAGE 1 : HOME ===== */
+  .hero{padding:38px 0 10px;}
+  .addr-line{
+    font-family:'Space Mono',monospace; font-weight:700; font-size:1.05rem; letter-spacing:.02em;
+    color:var(--primary-dark); text-align:center; margin-bottom:22px;
+  }
+  .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:36px; align-items:center;}
+  .hero h1{font-size:3rem; line-height:1.08; margin-bottom:18px;}
+  .hero p.lede{font-size:1.15rem; color:var(--ink-soft); max-width:46ch;}
+  .cta-row{display:flex; gap:14px; margin-top:28px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-weight:700; padding:14px 26px; border-radius:14px;
+    border:none; text-decoration:none; font-size:.98rem;
+  }
+  .btn.primary{background:var(--accent); color:#fff;}
+  .btn.primary:hover{background:var(--accent-dark);}
+  .btn.ghost{background:transparent; border:2px solid var(--primary-dark); color:var(--primary-dark);}
+  .hero-photo{aspect-ratio:4/3.1;}
+
+  /* Office tour — signature filmstrip */
+  .tour{margin-top:80px;}
+  .tour-head{display:flex; justify-content:space-between; align-items:flex-end; gap:20px; margin-bottom:30px; flex-wrap:wrap;}
+  .tour-head h2{font-size:1.9rem;}
+  .filmstrip{display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative;}
+  .stop{position:relative; padding:0 14px;}
+  .stop::before{
+    content:""; position:absolute; top:29px; left:-6%; width:112%; height:2px;
+    background:repeating-linear-gradient(90deg,var(--primary) 0 8px, transparent 8px 16px); z-index:0;
+  }
+  .stop:first-child::before{left:50%; width:62%;}
+  .stop:last-child::before{width:50%;}
+  .stamp{
+    width:58px; height:58px; border-radius:50%; background:var(--primary-dark); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-family:'Fredoka'; font-weight:600; font-size:1.15rem;
+    position:relative; z-index:1; margin-bottom:14px; border:4px solid var(--bg);
+  }
+  .stop .photo{aspect-ratio:4/3.4; margin-bottom:12px;}
+  .stop h3{font-size:1rem; font-family:'Plus Jakarta Sans'; font-weight:800; color:var(--ink);}
+  .stop p{margin:4px 0 0; font-size:.85rem; color:var(--ink-soft);}
+
+  /* Services teaser + Testimonials + family band shared */
+  .cards4{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:8px;}
+  .svc-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:24px; text-align:left;}
+  .svc-card .icon{width:44px; height:44px; border-radius:12px; background:var(--mint); display:flex; align-items:center; justify-content:center; margin-bottom:14px;}
+  .svc-card h3{font-family:'Plus Jakarta Sans'; font-size:1.05rem; font-weight:800; margin-bottom:8px;}
+  .svc-card a.more{font-weight:700; color:var(--accent-dark); font-size:.88rem; text-decoration:none; display:inline-block; margin-top:10px;}
+
+  .family-band{
+    margin-top:80px; background:var(--primary-dark); color:#fff; border-radius:28px; padding:48px;
+    display:grid; grid-template-columns:.9fr 1.1fr; gap:36px; align-items:center;
+  }
+  .family-band .photo{aspect-ratio:4/3; background:repeating-linear-gradient(135deg,#5A3F7D,#5A3F7D 10px,#654589 10px,#654589 20px);}
+  .family-band h2{color:#fff; font-size:2.1rem; line-height:1.15;}
+  .family-band p{color:#E4DEF5; max-width:46ch; margin-top:14px;}
+
+  .testi{margin-top:80px;}
+  .stars{color:var(--sun); font-size:1rem; letter-spacing:2px; margin-bottom:10px;}
+  .testi-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px;}
+  .testi-card p{font-style:italic; color:var(--ink-soft);}
+  .testi-card .who{margin-top:14px; font-weight:800; font-size:.85rem; color:var(--ink);}
+
+  /* ===== PAGE 2 : MEET OUR DOCS ===== */
+  .docs-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .doc-card{background:var(--surface); border-radius:var(--radius); border:1px solid var(--line); overflow:hidden;}
+  .doc-card .photo{aspect-ratio:16/11; border-radius:0;}
+  .doc-card .photo:has(img){max-width:75%; margin:0 auto;}
+  .doc-card .body{padding:28px;}
+  .doc-card h3{font-size:1.4rem; font-family:'Fredoka'; color:var(--primary-dark);}
+  .doc-card .role{font-family:'Space Mono',monospace; font-size:.78rem; color:var(--accent-dark); margin:6px 0 14px;}
+  .doc-card p.bio{color:var(--ink-soft); font-size:.95rem;}
+
+  /* ===== PAGE 3 : SERVICES ===== */
+  .svc-tabbar{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:34px;}
+  .svc-tabbar button{
+    font-weight:800; font-size:1rem; padding:13px 22px; border-radius:14px; border:2px solid var(--primary-dark);
+    background:var(--surface); color:var(--primary-dark);
+  }
+  .svc-tabbar button.active{background:var(--primary-dark); color:#fff;}
+  .svc-panel{display:none; grid-template-columns:1fr 1fr; gap:44px; align-items:center;}
+  .svc-panel.active{display:grid;}
+  .svc-panel .photo{aspect-ratio:4/3.3;}
+  .svc-panel[data-panel="restorative"] .photo:has(img),
+  .svc-panel[data-panel="prevention"] .photo:has(img){max-width:75%; margin:0 auto;}
+  .svc-panel h3{font-size:1.7rem; margin-bottom:14px;}
+  .svc-panel ul{padding-left:0; list-style:none; margin:0;}
+  .svc-panel li{
+    padding:12px 0 12px 30px; border-bottom:1px solid var(--line); position:relative; font-size:1.02rem;
+  }
+  .svc-panel li:last-child{border-bottom:none;}
+  .svc-panel li::before{content:"✓"; position:absolute; left:0; color:var(--primary); font-weight:800;}
+  .rename-note{font-family:'Space Mono',monospace; font-size:.72rem; color:var(--accent-dark); margin-top:10px;}
+
+  .support-photos{margin-top:70px;}
+  .support-photos .grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+  .support-photos .photo{aspect-ratio:1/1;}
+
+  /* ===== PAGE 4 : FORMS ===== */
+  .forms-intro{background:var(--mint); border-radius:var(--radius); padding:30px 34px; margin-bottom:44px; max-width:900px; margin-left:auto; margin-right:auto; text-align:center;}
+  .forms-intro p{margin:0; color:var(--primary-dark); font-weight:600;}
+  .forms-columns{display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start;}
+  .form-box{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:32px;
+  }
+  .form-box h3{font-size:1.2rem; margin-bottom:16px; color:var(--primary-dark);}
+  .form-box p{margin:0 0 14px; font-size:.95rem; color:var(--ink-soft);}
+  .form-box p strong{color:var(--ink);}
+  .form-links{list-style:none; padding:0; margin:0 0 14px;}
+  .form-links li{margin-bottom:8px;}
+  .form-links a{
+    display:inline-block; font-weight:700; font-size:.92rem; color:var(--primary-dark);
+    text-decoration:none; border-bottom:2px solid var(--accent); padding-bottom:1px;
+  }
+  .form-links a:hover{color:var(--accent-dark);}
+
+  /* ===== PAGE 5 : CONTACT ===== */
+  .contact-jump{text-align:center; margin-bottom:36px;}
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .map-block{border-radius:var(--radius); overflow:hidden; min-height:340px; position:relative; background:
+      linear-gradient(135deg,#EDE9F7,#DCD3EF);}
+  .map-block .pin{
+    position:absolute; top:44%; left:52%; transform:translate(-50%,-100%); color:var(--accent-dark);
+  }
+  .map-block .tag{position:absolute; bottom:16px; left:16px;}
+  .info-block{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:30px;}
+  .info-block h3{font-size:1.1rem; margin-bottom:14px;}
+  table.hours{width:100%; border-collapse:collapse; margin-bottom:24px;}
+  table.hours td{padding:9px 0; border-bottom:1px solid var(--line); font-size:.94rem;}
+  table.hours td:first-child{font-weight:700; color:var(--primary-dark); width:40%;}
+  .contact-line{display:flex; gap:10px; align-items:center; font-size:.95rem; margin-bottom:10px;}
+  .social-row{display:flex; gap:12px; margin-top:20px;}
+  .social-row a{
+    width:42px; height:42px; border-radius:50%; background:var(--mint); display:flex; align-items:center; justify-content:center;
+    color:var(--primary-dark); text-decoration:none; font-weight:800; font-size:.8rem;
+  }
+
+  /* ===== PAGE 6 : FAQ ===== */
+  .faq-list{max-width:800px; margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; padding:22px 4px; font-size:1.05rem;
+    font-weight:700; color:var(--ink); display:flex; justify-content:space-between; align-items:center; gap:16px;
+  }
+  .faq-q .plus{color:var(--accent-dark); font-size:1.3rem; font-family:'Fredoka'; transition:.2s;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease; font-size:.95rem; color:var(--ink-soft);}
+  .faq-item.open .faq-a{max-height:220px;}
+  .faq-a-inner{padding:0 4px 22px;}
+  .draft-tag{font-family:'Space Mono',monospace; font-size:.68rem; color:var(--accent-dark); display:block; margin-top:8px;}
+
+  footer.site{background:var(--primary-dark); color:#E4DEF5; padding:34px 0; text-align:center; font-size:.85rem;}
+  footer.site a{color:#fff; text-decoration:underline;}
+
+  @media (max-width:880px){
+    .hero-grid, .docs-grid, .svc-panel, .contact-grid, .family-band, .forms-columns{grid-template-columns:1fr;}
+    .filmstrip, .cards4, .support-photos .grid4{grid-template-columns:repeat(2,1fr); gap:22px;}
+    .nav-row{flex-direction:column; align-items:flex-start;}
+    nav.tabs{justify-content:flex-start;}
+    .hero h1{font-size:2.2rem;}
+  }
+  @media (max-width:520px){
+    .filmstrip, .cards4, .support-photos .grid4{grid-template-columns:1fr;}
+    .stop::before{display:none;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;} .faq-a{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <div class="logo">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 5 4.5 5 8.5c0 3 1.4 4.6 1.9 7.8.3 2 .6 4.7 2.6 4.7 1.7 0 1.7-2.6 1.9-4.3.1-1 .3-1.7 1-1.7s.9.7 1 1.7c.2 1.7.2 4.3 1.9 4.3 2 0 2.3-2.7 2.6-4.7C18.6 13.1 20 11.5 20 8.5 20 4.5 17 2 13 2h-1z" stroke="#6B4E90" stroke-width="1.5"/></svg>
+      CCCD
+    </div>
+    <nav class="tabs">
+      <a href="#home" class="active">Home</a>
+      <a href="#docs">Meet Our Docs</a>
+      <a href="#services">Services</a>
+      <a href="#forms">Forms</a>
+      <a href="#contact">Contact Us</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= PAGE 1 — HOME ================= -->
+<section class="page" id="home">
+  <div class="wrap hero">
+    <div class="addr-line">355 LENNON LN, #215 · WALNUT CREEK, CA 94598</div>
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Pediatric &amp; Family Dentistry</span>
+        <h1>Let our family<br>take care of yours.</h1>
+        <p class="lede">A complete family dental office treating patients age one and up — friendly, gentle, and built around what actually makes kids comfortable.</p>
+        <div class="cta-row">
+          <a href="#tour" class="btn ghost">Take the Office Tour</a>
+        </div>
+      </div>
+      <div class="photo hero-photo"><img src="images/Ham_Fam.JPEG" alt="The Ham family" class="ph" decoding="async" fetchpriority="high"></div>
+    </div>
+
+    <!-- Signature element: Office Tour filmstrip -->
+    <div class="tour" id="tour">
+      <div class="tour-head">
+        <div>
+          <span class="eyebrow">Virtual Office Tour</span>
+          <h2>Walk through before you visit</h2>
+        </div>
+        <a href="#" class="btn ghost">Watch the video tour</a>
+      </div>
+      <div class="filmstrip">
+        <div class="stop">
+          <div class="stamp">1</div>
+          <div class="photo"><img src="images/Reception_and_Waiting.jpg" alt="Reception and waiting area" class="ph" loading="lazy" decoding="async"></div>
+          <h3>Reception &amp; Waiting</h3>
+          <p>Arcade games while you wait</p>
+        </div>
+        <div class="stop">
+          <div class="stamp">2</div>
+          <div class="photo"><img src="images/Playroom.jpg" alt="Play room" class="ph" loading="lazy" decoding="async"></div>
+          <h3>Play Room</h3>
+          <p>A room built just for kids</p>
+        </div>
+        <div class="stop">
+          <div class="stamp">3</div>
+          <div class="photo"><img src="images/Open_Bay.jpg" alt="Open bay treatment area" class="ph" loading="lazy" decoding="async"></div>
+          <h3>Open Bay</h3>
+          <p>Movies during check-ups</p>
+        </div>
+        <div class="stop">
+          <div class="stamp">4</div>
+          <div class="photo"><img src="images/Consult_Room.jpg" alt="Consult room" class="ph" loading="lazy" decoding="async"></div>
+          <h3>Consult Room</h3>
+          <p>One-on-one with your doctor</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services teaser, moved here per storyboard note -->
+    <div class="tour" style="margin-top:90px;">
+      <div class="tour-head">
+        <div>
+          <span class="eyebrow">Our Services</span>
+          <h2>Care for every visit</h2>
+        </div>
+        <a href="#services" class="btn ghost">See all services</a>
+      </div>
+      <div class="cards4">
+        <div class="svc-card">
+          <div class="icon">🦷</div>
+          <h3>1st Visit</h3>
+          <p style="font-size:.88rem; color:var(--ink-soft);">Infant exams &amp; kindergarten screening</p>
+          <a href="#services" class="more">Learn more →</a>
+        </div>
+        <div class="svc-card">
+          <div class="icon">🛠️</div>
+          <h3>Restorative</h3>
+          <p style="font-size:.88rem; color:var(--ink-soft);">Comfort-first sedation &amp; fillings</p>
+          <a href="#services" class="more">Learn more →</a>
+        </div>
+        <div class="svc-card">
+          <div class="icon">💛</div>
+          <h3>Special Needs</h3>
+          <p style="font-size:.88rem; color:var(--ink-soft);">Customized, patient, judgment-free</p>
+          <a href="#services" class="more">Learn more →</a>
+        </div>
+        <div class="svc-card">
+          <div class="icon">✨</div>
+          <h3>Prevention</h3>
+          <p style="font-size:.88rem; color:var(--ink-soft);">Cleanings, sealants &amp; tooth tips</p>
+          <a href="#services" class="more">Learn more →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="family-band">
+      <div class="photo"><span class="tag">PHOTO — swap for updated family/team photo</span></div>
+      <div>
+        <span class="eyebrow" style="color:var(--sun);">Our Promise</span>
+        <h2>We treat every patient like family.</h2>
+        <p>Open, honest, and conservative care — the same standard we'd want for our own kids.</p>
+      </div>
+    </div>
+
+    <div class="testi">
+      <div class="page-kicker">
+        <span class="eyebrow">What Our Patients Say</span>
+        <h2>From our Google reviews</h2>
+      </div>
+      <div class="cards4" style="grid-template-columns:repeat(3,1fr);">
+        <div class="testi-card"><div class="stars">★★★★★</div><p>"Both my children have been patients of Doctor Ham for years! FRIENDLY staff, welcoming environment, excellent care. Would recommend to anyone. My kids actually get excited when i tell them we are going for a visit"</p><div class="who">— Jody G.</div></div>
+        <div class="testi-card"><div class="stars">★★★★★</div><p>"Dr. Tiffany Ham's office is a close second to Disneyland! Her office is fun, bright, and thoughtful for a childs dental office! Her crew is so sweet, helpful, and most important is the joyful attitudes, from the moment you step into the lobby and throughout, everyone working here makes you try to be as comfortable, at ease, and considered as possible. They skillfully and lovingly care for all three of my kids when we come for our dentistry needs. I'm unbelievably grateful for this team, highly recommend this place, and truly can't thank them enough for their care!"</p><div class="who">— Sarah R.</div></div>
+        <div class="testi-card"><div class="stars">★★★★★</div><p>"The best kids dentist! My daughter is scared all the time of the dentist and they took the time and care to engage with her a make her comeback. Also went for the least invasive treatment option. Highly recommend."</p><div class="who">— Amanda</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAGE 2 — MEET OUR DOCS ================= -->
+<section class="page alt" id="docs">
+  <div class="wrap">
+    <div class="page-kicker">
+      <span class="eyebrow">Meet Our Docs</span>
+      <h2>The people behind the care</h2>
+    </div>
+    <div class="docs-grid">
+      <div class="doc-card">
+        <div class="photo"><img src="images/THam_headshot.jpg" alt="Dr. Tiffany Ham, pediatric dentist" class="ph" loading="lazy" decoding="async"></div>
+        <div class="body">
+          <h3>Dr. Tiffany Ham</h3>
+          <div class="role">PEDIATRIC DENTIST</div>
+          <p class="bio">[Bio placeholder — background, training, and what drew Dr. Ham to pediatric dentistry. Pull current bio copy or draft new.]</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="photo"><img src="images/AHam_headshot.jpg" alt="Dr. Alex Ham, pediatric dentist" class="ph" loading="lazy" decoding="async"></div>
+        <div class="body">
+          <h3>Dr. Alex</h3>
+          <div class="role">PEDIATRIC DENTIST</div>
+          <p class="bio">[Bio placeholder — background, training, and approach to treating kids. Pull current bio copy or draft new.]</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAGE 3 — SERVICES ================= -->
+<section class="page" id="services">
+  <div class="wrap">
+    <div class="page-kicker">
+      <span class="eyebrow">Our Services</span>
+      <h2>Care built around your child</h2>
+    </div>
+    <div class="svc-tabbar" role="tablist">
+      <button class="active" data-tab="visit">1st Visit</button>
+      <button data-tab="restorative">Restorative</button>
+      <button data-tab="special">Special Needs</button>
+      <button data-tab="prevention">Prevention</button>
+    </div>
+
+    <div class="svc-panel active" data-panel="visit">
+      <div class="photo"><img src="images/Infant_1st_visit.jpg" alt="Infant first dental visit" class="ph" loading="lazy" decoding="async"></div>
+      <div>
+        <h3>1st Visit</h3>
+        <ul>
+          <li>Infant exam</li>
+          <li>Kindergarten screening</li>
+          <li>Parent education</li>
+          <li>Tips on cavity prevention</li>
+          <li>Early cavity detection</li>
+          <li>Child-friendly terms</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svc-panel" data-panel="restorative">
+      <div class="photo"><img src="images/Dental_Chair.jpg" alt="Dental treatment chair" class="ph" loading="lazy" decoding="async"></div>
+      <div>
+        <h3>Restorative</h3>
+        <ul>
+          <li>Nitrous oxide (laughing gas)</li>
+          <li>Moderate oral sedation</li>
+          <li>General anesthesia</li>
+          <li>Composite fillings</li>
+          <li>SDF "no-shot" numbing</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svc-panel" data-panel="special">
+      <div class="photo"><img src="images/Dental_Storyboard.jpeg" alt="Going to the Dentist social story for special needs patients" class="ph" loading="lazy" decoding="async"></div>
+      <div>
+        <h3>Special Needs</h3>
+        <ul>
+          <li>Social visits</li>
+          <li>Dental social story</li>
+          <li>Customized care tailored to your child's specific needs</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="svc-panel" data-panel="prevention">
+      <div class="photo"><img src="images/Tooth_Brushing_Itself.JPEG" alt="Child brushing teeth" class="ph" loading="lazy" decoding="async"></div>
+      <div>
+        <h3>Prevention</h3>
+        <ul>
+          <li>Professional dental cleaning</li>
+          <li>Silver diamine fluoride</li>
+          <li>Digital x-ray</li>
+          <li>Tongue-tie / lip-tie consultation</li>
+          <li>Habit counseling</li>
+          <li>Sealants</li>
+          <li>Orthodontic screening</li>
+          <li>Tooth tips</li>
+        </ul>
+        <div class="rename-note">✎ Storyboard flags this tab for a possible rename — confirm final label with client before launch.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= PAGE 4 — FORMS ================= -->
+<section class="page alt" id="forms">
+  <div class="wrap">
+    <div class="page-kicker">
+      <span class="eyebrow">Forms</span>
+      <h2>Handled before you arrive</h2>
+    </div>
+    <div class="forms-intro">
+      <p>"Thank you for completing your patient paperwork prior to your appointment so we can spend more time getting to know you and addressing your needs efficiently."</p>
+      <span class="draft-tag">✎ Storyboard note: replace with exact copy from the current site.</span>
+    </div>
+    <div class="forms-columns">
+      <div class="form-box">
+        <h3>New Patient Forms</h3>
+        <p>Dear New Patient,</p>
+        <p>Please complete the following patient questionnaire before your first appointment:</p>
+        <ul class="form-links">
+          <li><a href="https://yapi.me/co?m=xyhji9mqqjsnc" target="_blank" rel="noopener">Child New Patient Paperwork</a></li>
+          <li><a href="https://yapi.me/co?m=2ii1o69kcfei8" target="_blank" rel="noopener">Adult New Patient Paperwork</a></li>
+        </ul>
+        <p>This way we can more efficiently serve you and spend more time getting to know you during your first visit with us. We understand that there are many choices when choosing a Dental Home. We are honored that you chose us to take care of your dental health needs and very much look forward to seeing you soon!</p>
+        <p>Sincerely,<br>Dr. Tiffany and Dr. Alex Ham</p>
+      </div>
+      <div class="form-box">
+        <h3>Existing Patient Forms</h3>
+        <p><strong>Check up Appointment:</strong></p>
+        <p>Please update your information and Medical History prior to your check up appointment using the form below:</p>
+        <ul class="form-links">
+          <li><a href="https://yapi.me/co?m=knw7w5muprlg0" target="_blank" rel="noopener">Existing Patient Update (Recall)</a></li>
+        </ul>
+        <p><strong>Treatment Appointment:</strong></p>
+        <p>Please complete the following Treatment Consent Forms prior to your treatment appointment:</p>
+        <ul class="form-links">
+          <li><a href="https://yapi.me/co?m=gbovj3muq60qg" target="_blank" rel="noopener">CCCD Treatment Consents Link</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAGE 5 — CONTACT US ================= -->
+<section class="page" id="contact">
+  <div class="wrap">
+    <div class="contact-jump">
+      <span class="eyebrow">Contact Us</span>
+      <h2>Come say hello</h2>
+      <p style="color:var(--ink-soft); margin-top:6px;">This section also anchors a "Contact Us" jump button at the top of every page, and repeats at the bottom of the Homepage per the storyboard.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="map-block">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1573.5689150387152!2d-122.03168579273493!3d37.927210396204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085605644a6131d%3A0x9e73bc768ba944e4!2s355+Lennon+Ln%2C+Walnut+Creek%2C+CA+94598!5e0!3m2!1sen!2sus!4v1465719086800"
+          title="Map to Contra Costa Children's Dentistry, 355 Lennon Ln #215, Walnut Creek, CA 94598"
+          width="100%" height="100%" style="border:0; min-height:340px; display:block;"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <div class="info-block">
+        <h3>355 Lennon Ln, #215<br>Walnut Creek, CA 94598</h3>
+        <table class="hours">
+          <tr><td>Tuesday</td><td>9–12 / 1–5</td></tr>
+          <tr><td>Wednesday</td><td>9–12 / 1–5</td></tr>
+          <tr><td>Thursday</td><td>9–12 / 1–5</td></tr>
+          <tr><td>Friday</td><td>9–12 / 1–5</td></tr>
+        </table>
+        <div class="contact-line">📞 <a href="tel:+19254826223">(925) 482-6223</a></div>
+        <div class="contact-line">✉️ <a href="mailto:smile@ContraCostaChildrensDentistry.com">smile@ContraCostaChildrensDentistry.com</a></div>
+        <div class="contact-line">📠 925.357.3777 <span style="color:var(--ink-soft); font-size:.85rem;">(fax)</span></div>
+        <div class="social-row">
+          <a href="https://www.instagram.com/cccdentistry/" target="_blank" rel="noopener" title="Instagram">IG</a>
+          <a href="#" title="Facebook">FB</a>
+          <a href="#" title="TikTok">TT</a>
+        </div>
+        <span class="draft-tag">✎ Instagram handle taken from in-office signage (@cccdentistry) — confirm. Facebook / TikTok URLs still needed.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAGE 6 — FAQ ================= -->
+<section class="page alt" id="faq">
+  <div class="wrap">
+    <div class="page-kicker">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions parents ask us</h2>
+    </div>
+    <div class="faq-list" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q"><span>What is a pediatric dentist?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">A pediatric dentist completes extra training beyond dental school focused on infants, children, and teens, including kids with special needs.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>What age should I bring my child to the dentist?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Most guidelines recommend a first visit by age one, or within six months of the first tooth coming in.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>How do I prevent cavities?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Regular brushing, limiting sugary snacks and drinks, and routine cleanings are the biggest factors.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>What if my child's teeth look crowded ("double parked")?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Crowding is common while jaws are still growing — we'll monitor it and recommend an orthodontic screening if needed.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Are wiggly teeth normal?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes — it's a normal sign that a baby tooth is making room for the permanent tooth underneath.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>What kind of toothpaste should my child use?</span><span class="plus">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">A fluoride toothpaste appropriate for their age, in a rice-grain to pea-sized amount — we're happy to recommend a brand at your visit.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">High-fidelity mockup for internal review — Contra Costa Children's Dentistry · not the live site</div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close full-size image">✕</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<script>
+  // Services tabs
+  document.querySelectorAll('.svc-tabbar button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.svc-tabbar button').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.svc-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector('.svc-panel[data-panel="'+btn.dataset.tab+'"]').classList.add('active');
+    });
+  });
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll('section.page');
+  const links = document.querySelectorAll('nav.tabs a');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        const match = document.querySelector('nav.tabs a[href="#'+e.target.id+'"]');
+        if(match) match.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-40% 0px -55% 0px'});
+  sections.forEach(s=>obs.observe(s));
+
+  // Lightbox — works for any img.ph photo, including ones added later
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxClose = document.getElementById('lightboxClose');
+  let lastFocused = null;
+
+  function openLightbox(img){
+    lastFocused = document.activeElement;
+    lightboxImg.src = img.currentSrc || img.src;
+    lightboxImg.alt = img.alt || '';
+    lightboxCaption.textContent = img.alt || '';
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden','false');
+    lightboxClose.focus();
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden','true');
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+    if(lastFocused) lastFocused.focus();
+  }
+
+  // Make every current and future .ph photo clickable/keyboard-openable
+  document.addEventListener('click', (e)=>{
+    const img = e.target.closest('img.ph');
+    if(img){ openLightbox(img); return; }
+    if(e.target === lightbox || e.target === lightboxClose){ closeLightbox(); }
+  });
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+    if(e.key === 'Enter' || e.key === ' '){
+      if(document.activeElement && document.activeElement.matches('img.ph')){
+        e.preventDefault();
+        openLightbox(document.activeElement);
+      }
+    }
+  });
+  // Give every img.ph keyboard focusability + a11y role
+  function makePhotosAccessible(){
+    document.querySelectorAll('img.ph').forEach(img=>{
+      if(!img.hasAttribute('tabindex')){
+        img.setAttribute('tabindex','0');
+        img.setAttribute('role','button');
+        img.setAttribute('aria-label', 'View full-size image: ' + (img.alt || 'photo'));
+      }
+    });
+  }
+  makePhotosAccessible();
+  new MutationObserver(makePhotosAccessible).observe(document.body, {childList:true, subtree:true});
+</script>
+</body>
+</html>
