@@ -3,7 +3,7 @@
 High-fidelity single-page mockup for **Contra Costa Children's Dentistry** (Walnut Creek, CA).
 Six sections — Home, Meet Our Docs, Services, Forms, Contact Us, FAQ — navigated by a sticky top nav with anchor links.
 
-Not the live site. This is for internal review and for handing to Claude Design.
+Not the live site. This is for internal review and for handing to Claude Design
 
 ## Contents
 
