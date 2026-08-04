@@ -76,10 +76,11 @@
   }
   h1,h2,h3,.display{font-family:'Fredoka', sans-serif; font-weight:600; color:var(--primary-dark); margin:0;}
   .eyebrow{
-    font-family:'Space Mono', monospace; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+    font-family:'Space Mono', monospace; font-size:1.05rem; letter-spacing:.12em; text-transform:uppercase;
     color:var(--primary); font-weight:700;
   }
-  a{color:inherit;}
+  a{color:var(--primary-dark);}
+  a:hover{color:var(--accent-dark);}
   img.ph{width:100%; height:auto; object-fit:contain; display:block; cursor:zoom-in;}
   .photo:has(img){background:var(--mint); padding:6px; aspect-ratio:auto !important; height:auto !important; align-items:stretch;}
 
@@ -148,29 +149,51 @@
   }
   .btn.primary{background:var(--accent); color:#fff;}
   .btn.primary:hover{background:var(--accent-dark);}
-  .btn.ghost{background:transparent; border:2px solid var(--primary-dark); color:var(--primary-dark);}
+  .btn.ghost{background:transparent; border:2px solid var(--primary-dark); color:var(--primary-dark); transition:.15s;}
+  .btn.ghost:hover{background:var(--primary-dark); color:#fff;}
   .hero-photo{aspect-ratio:4/3.1;}
 
-  /* Office tour — signature filmstrip */
+  /* Office tour — slideshow */
   .tour{margin-top:80px;}
   .tour-head{display:flex; justify-content:space-between; align-items:flex-end; gap:20px; margin-bottom:30px; flex-wrap:wrap;}
   .tour-head h2{font-size:1.9rem;}
-  .filmstrip{display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative;}
-  .stop{position:relative; padding:0 14px;}
-  .stop::before{
-    content:""; position:absolute; top:29px; left:-6%; width:112%; height:2px;
-    background:repeating-linear-gradient(90deg,var(--primary) 0 8px, transparent 8px 16px); z-index:0;
+  .slideshow-row{display:flex; align-items:center; gap:20px;}
+  .slide-arrow{
+    width:44px; height:44px; border-radius:50%; flex:none; background:var(--surface);
+    border:2px solid var(--primary-dark); color:var(--primary-dark); font-size:1.1rem; font-weight:800;
+    display:flex; align-items:center; justify-content:center; transition:.15s;
   }
-  .stop:first-child::before{left:50%; width:62%;}
-  .stop:last-child::before{width:50%;}
-  .stamp{
-    width:58px; height:58px; border-radius:50%; background:var(--primary-dark); color:#fff;
-    display:flex; align-items:center; justify-content:center; font-family:'Fredoka'; font-weight:600; font-size:1.15rem;
-    position:relative; z-index:1; margin-bottom:14px; border:4px solid var(--bg);
+  .slide-arrow:hover{background:var(--primary-dark); color:#fff;}
+  .slide-viewer{
+    flex:1; min-width:0; background:var(--mint); border:1px solid var(--line); border-radius:16px;
+    padding:6px; height:460px; display:flex; align-items:center; justify-content:center;
   }
-  .stop .photo{aspect-ratio:4/3.4; margin-bottom:12px;}
-  .stop h3{font-size:1rem; font-family:'Plus Jakarta Sans'; font-weight:800; color:var(--ink);}
-  .stop p{margin:4px 0 0; font-size:.85rem; color:var(--ink-soft);}
+  .slide-viewer img{max-width:100%; max-height:100%; object-fit:contain; display:block; border-radius:8px; cursor:zoom-in;}
+  .slide-caption{display:flex; align-items:baseline; gap:12px; margin-top:14px; flex-wrap:wrap;}
+  .slide-caption h3{font-family:'Plus Jakarta Sans'; font-size:1.05rem; font-weight:800; color:var(--ink);}
+  .slide-caption p{margin:0; font-size:.85rem; color:var(--ink-soft);}
+  .slide-counter{
+    margin-left:auto; font-family:'Space Mono',monospace; font-size:1.05rem; letter-spacing:.12em;
+    color:var(--accent-dark);
+  }
+  .slide-rail{position:relative; margin-top:24px;}
+  .slide-rail::before{
+    content:""; position:absolute; top:28px; left:6%; width:88%; height:2px;
+    background:repeating-linear-gradient(90deg,var(--primary) 0 8px, transparent 8px 16px);
+  }
+  .slide-rail .stamps{display:flex; justify-content:space-between; position:relative;}
+  .slide-rail button{
+    display:flex; flex-direction:column; align-items:center; gap:8px; background:none; border:none;
+    padding:0; max-width:150px; text-align:center;
+  }
+  .slide-rail .stamp{
+    width:58px; height:58px; border-radius:50%; background:var(--surface); color:var(--primary-dark);
+    border:2px solid var(--primary-dark); display:flex; align-items:center; justify-content:center;
+    font-family:'Fredoka'; font-weight:600; font-size:1.15rem; transition:.15s;
+  }
+  .slide-rail .label{font-size:.8rem; font-weight:500; color:var(--ink-soft);}
+  .slide-rail button[aria-current="true"] .stamp{background:var(--primary-dark); color:#fff; border:4px solid var(--bg);}
+  .slide-rail button[aria-current="true"] .label{font-weight:800; color:var(--ink);}
 
   /* Services teaser + Testimonials + family band shared */
   .cards4{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:8px;}
@@ -224,13 +247,10 @@
   .svc-panel li::before{content:"✓"; position:absolute; left:0; color:var(--primary); font-weight:800;}
   .rename-note{font-family:'Space Mono',monospace; font-size:.72rem; color:var(--accent-dark); margin-top:10px;}
 
-  .support-photos{margin-top:70px;}
-  .support-photos .grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
-  .support-photos .photo{aspect-ratio:1/1;}
-
   /* ===== PAGE 4 : FORMS ===== */
   .forms-intro{background:var(--mint); border-radius:var(--radius); padding:30px 34px; margin-bottom:44px; max-width:900px; margin-left:auto; margin-right:auto; text-align:center;}
   .forms-intro p{margin:0; color:var(--primary-dark); font-weight:600;}
+  .forms-photo{max-width:900px; margin:0 auto 44px; aspect-ratio:16/6;}
   .forms-columns{display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:start;}
   .form-box{
     background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:32px;
@@ -251,15 +271,13 @@
   .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
   .map-block{border-radius:var(--radius); overflow:hidden; min-height:340px; position:relative; background:
       linear-gradient(135deg,#EDE9F7,#DCD3EF);}
-  .map-block .pin{
-    position:absolute; top:44%; left:52%; transform:translate(-50%,-100%); color:var(--accent-dark);
-  }
   .map-block .tag{position:absolute; bottom:16px; left:16px;}
   .info-block{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:30px;}
   .info-block h3{font-size:1.1rem; margin-bottom:14px;}
   table.hours{width:100%; border-collapse:collapse; margin-bottom:24px;}
   table.hours td{padding:9px 0; border-bottom:1px solid var(--line); font-size:.94rem;}
   table.hours td:first-child{font-weight:700; color:var(--primary-dark); width:40%;}
+  table.hours td:last-child{font-family:'Space Mono',monospace;}
   .contact-line{display:flex; gap:10px; align-items:center; font-size:.95rem; margin-bottom:10px;}
   .social-row{display:flex; gap:12px; margin-top:20px;}
   .social-row a{
@@ -286,14 +304,17 @@
 
   @media (max-width:880px){
     .hero-grid, .docs-grid, .svc-panel, .contact-grid, .family-band, .forms-columns{grid-template-columns:1fr;}
-    .filmstrip, .cards4, .support-photos .grid4{grid-template-columns:repeat(2,1fr); gap:22px;}
+    .cards4{grid-template-columns:repeat(2,1fr); gap:22px;}
     .nav-row{flex-direction:column; align-items:flex-start;}
     nav.tabs{justify-content:flex-start;}
     .hero h1{font-size:2.2rem;}
+    .slide-viewer{height:320px;}
+    .slide-rail .label{display:none;}
   }
   @media (max-width:520px){
-    .filmstrip, .cards4, .support-photos .grid4{grid-template-columns:1fr;}
-    .stop::before{display:none;}
+    .cards4{grid-template-columns:1fr;}
+    .slide-rail::before{display:none;}
+    .slide-rail .stamp{width:44px; height:44px; font-size:1rem;}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;} .faq-a{transition:none;}
@@ -335,44 +356,37 @@
       <div class="photo hero-photo"><img src="images/Ham_Fam.JPEG" alt="The Ham family" class="ph" decoding="async" fetchpriority="high"></div>
     </div>
 
-    <!-- Signature element: Office Tour filmstrip -->
+    <!-- Signature element: Office Tour slideshow -->
     <div class="tour" id="tour">
       <div class="tour-head">
         <div>
           <span class="eyebrow">Virtual Office Tour</span>
-          <h2>Walk through before you visit</h2>
         </div>
         <a href="#" class="btn ghost">Watch the video tour</a>
       </div>
-      <div class="filmstrip">
-        <div class="stop">
-          <div class="stamp">1</div>
-          <div class="photo"><img src="images/Reception_and_Waiting.jpg" alt="Reception and waiting area" class="ph" loading="lazy" decoding="async"></div>
-          <h3>Reception &amp; Waiting</h3>
-          <p>Arcade games while you wait</p>
+
+      <div class="slideshow" id="tourShow">
+        <div class="slideshow-row">
+          <button class="slide-arrow" id="tourPrev" aria-label="Previous stop">‹</button>
+          <div style="flex:1; min-width:0;">
+            <div class="slide-viewer">
+              <img id="tourImg" src="images/Reception_and_Waiting.jpg" alt="Reception and waiting area with arcade games" class="ph">
+            </div>
+            <div class="slide-caption">
+              <h3 id="tourTitle">Reception &amp; Waiting</h3>
+              <p id="tourNote">Arcade games while you wait</p>
+              <span class="slide-counter" id="tourCounter">STOP 1 / 5</span>
+            </div>
+          </div>
+          <button class="slide-arrow" id="tourNext" aria-label="Next stop">›</button>
         </div>
-        <div class="stop">
-          <div class="stamp">2</div>
-          <div class="photo"><img src="images/Playroom.jpg" alt="Play room" class="ph" loading="lazy" decoding="async"></div>
-          <h3>Play Room</h3>
-          <p>A room built just for kids</p>
-        </div>
-        <div class="stop">
-          <div class="stamp">3</div>
-          <div class="photo"><img src="images/Open_Bay.jpg" alt="Open bay treatment area" class="ph" loading="lazy" decoding="async"></div>
-          <h3>Open Bay</h3>
-          <p>Movies during check-ups</p>
-        </div>
-        <div class="stop">
-          <div class="stamp">4</div>
-          <div class="photo"><img src="images/Consult_Room.jpg" alt="Consult room" class="ph" loading="lazy" decoding="async"></div>
-          <h3>Consult Room</h3>
-          <p>One-on-one with your doctor</p>
+        <div class="slide-rail">
+          <div class="stamps" id="tourRail"></div>
         </div>
       </div>
     </div>
 
-    <!-- Services teaser, moved here per storyboard note -->
+    <!-- Services teaser -->
     <div class="tour" style="margin-top:90px;">
       <div class="tour-head">
         <div>
@@ -423,9 +437,9 @@
         <span class="eyebrow">What Our Patients Say</span>
         <h2>From our Google reviews</h2>
       </div>
-      <div class="cards4" style="grid-template-columns:repeat(3,1fr);">
+      <div class="cards4" style="grid-template-columns:repeat(3,1fr); align-items:start;">
         <div class="testi-card"><div class="stars">★★★★★</div><p>"Both my children have been patients of Doctor Ham for years! FRIENDLY staff, welcoming environment, excellent care. Would recommend to anyone. My kids actually get excited when i tell them we are going for a visit"</p><div class="who">— Jody G.</div></div>
-        <div class="testi-card"><div class="stars">★★★★★</div><p>"Dr. Tiffany Ham's office is a close second to Disneyland! Her office is fun, bright, and thoughtful for a childs dental office! Her crew is so sweet, helpful, and most important is the joyful attitudes, from the moment you step into the lobby and throughout, everyone working here makes you try to be as comfortable, at ease, and considered as possible. They skillfully and lovingly care for all three of my kids when we come for our dentistry needs. I'm unbelievably grateful for this team, highly recommend this place, and truly can't thank them enough for their care!"</p><div class="who">— Sarah R.</div></div>
+        <div class="testi-card"><div class="stars">★★★★★</div><p>"Dr. Tiffany Ham's office is a close second to Disneyland! Her office is fun, bright, and thoughtful for a childs dental office! Her crew is so sweet, helpful, and most important is the joyful attitudes, from the moment you step into the lobby and throughout, everyone working here makes you try to be as comfortable, at ease, and considered as possible. They skillfully and lovingly care for all three of my kids when we come for our dentistry needs. I'm unbelievablely grateful for this team, highly recommend this place, and truly can't thank them enough for their care!"</p><div class="who">— Sarah R.</div></div>
         <div class="testi-card"><div class="stars">★★★★★</div><p>"The best kids dentist! My daughter is scared all the time of the dentist and they took the time and care to engage with her a make her comeback. Also went for the least invasive treatment option. Highly recommend."</p><div class="who">— Amanda</div></div>
       </div>
     </div>
@@ -445,15 +459,15 @@
         <div class="body">
           <h3>Dr. Tiffany Ham</h3>
           <div class="role">PEDIATRIC DENTIST</div>
-          <p class="bio">[Bio placeholder — background, training, and what drew Dr. Ham to pediatric dentistry. Pull current bio copy or draft new.]</p>
+          <p class="bio">[Bio placeholder — background, training, and what drew Dr. Ham to pediatric dentistry.]<span class="draft-tag">✎ Real bio still needed</span></p>
         </div>
       </div>
       <div class="doc-card">
         <div class="photo"><img src="images/AHam_headshot.jpg" alt="Dr. Alex Ham, pediatric dentist" class="ph" loading="lazy" decoding="async"></div>
         <div class="body">
-          <h3>Dr. Alex</h3>
+          <h3>Dr. Alex Ham</h3>
           <div class="role">PEDIATRIC DENTIST</div>
-          <p class="bio">[Bio placeholder — background, training, and approach to treating kids. Pull current bio copy or draft new.]</p>
+          <p class="bio">[Bio placeholder — background, training, and approach to treating kids.]<span class="draft-tag">✎ Real bio still needed</span></p>
         </div>
       </div>
     </div>
@@ -547,6 +561,7 @@
       <p>"Thank you for completing your patient paperwork prior to your appointment so we can spend more time getting to know you and addressing your needs efficiently."</p>
       <span class="draft-tag">✎ Storyboard note: replace with exact copy from the current site.</span>
     </div>
+    <div class="photo forms-photo"><span class="tag">PHOTO — front desk check-in, paperwork already done</span></div>
     <div class="forms-columns">
       <div class="form-box">
         <h3>New Patient Forms</h3>
@@ -582,7 +597,7 @@
     <div class="contact-jump">
       <span class="eyebrow">Contact Us</span>
       <h2>Come say hello</h2>
-      <p style="color:var(--ink-soft); margin-top:6px;">This section also anchors a "Contact Us" jump button at the top of every page, and repeats at the bottom of the Homepage per the storyboard.</p>
+      <p style="color:var(--ink-soft); margin-top:6px;">Free parking in the lot, second-floor suite, elevator on the left.</p>
     </div>
     <div class="contact-grid">
       <div class="map-block">
@@ -652,7 +667,7 @@
 </section>
 
 <footer class="site">
-  <div class="wrap">High-fidelity mockup for internal review — Contra Costa Children's Dentistry · not the live site</div>
+  <div class="wrap">Contra Costa Children's Dentistry · 355 Lennon Ln, #215, Walnut Creek, CA 94598 · <a href="tel:+19254826223">(925) 482-6223</a></div>
 </footer>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
@@ -662,7 +677,60 @@
 </div>
 
 <script>
-  // Services tabs
+  /* ---------- Office tour slideshow ---------- */
+  const STOPS = [
+    {title:'Reception & Waiting', note:'Arcade games while you wait', img:'images/Reception_and_Waiting.jpg', alt:'Reception and waiting area with arcade games'},
+    {title:'Play Room', note:'A room built just for kids', img:'images/Playroom.jpg', alt:'Play room with toy kitchen and reading bench'},
+    {title:'Open Bay', note:'Movies during check-ups', img:'images/Open_Bay.jpg', alt:'Open bay treatment area with ceiling screens'},
+    {title:'Consult Room', note:'One-on-one with your doctor', img:'images/Consult_Room.jpg', alt:'Consult room with window bench and toys'},
+    {title:'Prize Tower', note:'Every visit ends here', img:'images/Prize_Tower.jpg', alt:'Prize tower with balloons'}
+  ];
+  const AUTOPLAY_MS = 5000;
+  let tourIndex = 0, tourTimer = null, tourPaused = false;
+
+  const tourShow = document.getElementById('tourShow');
+  const tourImg = document.getElementById('tourImg');
+  const tourTitle = document.getElementById('tourTitle');
+  const tourNote = document.getElementById('tourNote');
+  const tourCounter = document.getElementById('tourCounter');
+  const tourRail = document.getElementById('tourRail');
+
+  STOPS.forEach((s, n) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', s.title);
+    b.innerHTML = '<span class="stamp">' + (n + 1) + '</span><span class="label">' + s.title.replace('&', '&amp;') + '</span>';
+    b.addEventListener('click', () => showStop(n));
+    tourRail.appendChild(b);
+  });
+
+  function showStop(n){
+    tourIndex = (n + STOPS.length) % STOPS.length;
+    const s = STOPS[tourIndex];
+    tourImg.src = s.img;
+    tourImg.alt = s.alt;
+    tourTitle.innerHTML = s.title.replace('&', '&amp;');
+    tourNote.textContent = s.note;
+    tourCounter.textContent = 'STOP ' + (tourIndex + 1) + ' / ' + STOPS.length + (tourPaused ? ' · PAUSED' : ' · AUTOPLAY');
+    [...tourRail.children].forEach((b, i) => {
+      if(i === tourIndex) b.setAttribute('aria-current','true'); else b.removeAttribute('aria-current');
+    });
+    restartTimer();
+  }
+  function restartTimer(){
+    clearTimeout(tourTimer);
+    if(tourPaused || STOPS.length < 2) return;
+    tourTimer = setTimeout(() => showStop(tourIndex + 1), AUTOPLAY_MS);
+  }
+  document.getElementById('tourPrev').addEventListener('click', () => showStop(tourIndex - 1));
+  document.getElementById('tourNext').addEventListener('click', () => showStop(tourIndex + 1));
+  ['mouseenter','focusin'].forEach(ev => tourShow.addEventListener(ev, () => { tourPaused = true; clearTimeout(tourTimer); showStopLabelOnly(); }));
+  ['mouseleave','focusout'].forEach(ev => tourShow.addEventListener(ev, () => { tourPaused = false; showStopLabelOnly(); restartTimer(); }));
+  function showStopLabelOnly(){
+    tourCounter.textContent = 'STOP ' + (tourIndex + 1) + ' / ' + STOPS.length + (tourPaused ? ' · PAUSED' : ' · AUTOPLAY');
+  }
+  showStop(0);
+
+  /* ---------- Services tabs ---------- */
   document.querySelectorAll('.svc-tabbar button').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       document.querySelectorAll('.svc-tabbar button').forEach(b=>b.classList.remove('active'));
@@ -671,7 +739,8 @@
       document.querySelector('.svc-panel[data-panel="'+btn.dataset.tab+'"]').classList.add('active');
     });
   });
-  // FAQ accordion
+
+  /* ---------- FAQ accordion ---------- */
   document.querySelectorAll('.faq-item').forEach(item=>{
     item.querySelector('.faq-q').addEventListener('click', ()=>{
       const isOpen = item.classList.contains('open');
@@ -679,7 +748,8 @@
       if(!isOpen) item.classList.add('open');
     });
   });
-  // Active nav highlight on scroll
+
+  /* ---------- Active nav highlight on scroll ---------- */
   const sections = document.querySelectorAll('section.page');
   const links = document.querySelectorAll('nav.tabs a');
   const obs = new IntersectionObserver((entries)=>{
@@ -693,7 +763,7 @@
   }, {rootMargin:'-40% 0px -55% 0px'});
   sections.forEach(s=>obs.observe(s));
 
-  // Lightbox — works for any img.ph photo, including ones added later
+  /* ---------- Lightbox ---------- */
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxCaption = document.getElementById('lightboxCaption');
@@ -717,8 +787,6 @@
     document.body.style.overflow = '';
     if(lastFocused) lastFocused.focus();
   }
-
-  // Make every current and future .ph photo clickable/keyboard-openable
   document.addEventListener('click', (e)=>{
     const img = e.target.closest('img.ph');
     if(img){ openLightbox(img); return; }
@@ -733,7 +801,6 @@
       }
     }
   });
-  // Give every img.ph keyboard focusability + a11y role
   function makePhotosAccessible(){
     document.querySelectorAll('img.ph').forEach(img=>{
       if(!img.hasAttribute('tabindex')){
