@@ -76,7 +76,7 @@
   }
   h1,h2,h3,.display{font-family:'Fredoka', sans-serif; font-weight:600; color:var(--primary-dark); margin:0;}
   .eyebrow{
-    font-family:'Space Mono', monospace; font-size:1.05rem; letter-spacing:.12em; text-transform:uppercase;
+    font-family:'Plus Jakarta Sans', sans-serif; font-size:1.3rem; letter-spacing:.12em; text-transform:uppercase;
     color:var(--primary); font-weight:700;
   }
   a{color:var(--primary-dark);}
@@ -172,9 +172,9 @@
     padding:6px; height:460px; display:flex; align-items:center; justify-content:center;
   }
   .slide-viewer img{max-width:100%; max-height:100%; object-fit:contain; display:block; border-radius:8px; cursor:zoom-in;}
-  .slide-caption{display:flex; align-items:baseline; gap:12px; margin-top:14px; flex-wrap:wrap;}
-  .slide-caption h3{font-family:'Plus Jakarta Sans'; font-size:1.05rem; font-weight:800; color:var(--ink);}
-  .slide-caption p{margin:0; font-size:.85rem; color:var(--ink-soft);}
+  .slide-caption{display:flex; align-items:baseline; gap:12px; margin-top:14px; flex-wrap:wrap; min-height:1.05rem;}
+  .slide-caption h3{font-family:'Plus Jakarta Sans'; font-size:1.05rem; font-weight:800; color:var(--ink); min-height:1.2em;}
+  .slide-caption p{margin:0; font-size:.85rem; color:var(--ink-soft); min-height:1.2em;}
   .slide-counter{
     margin-left:auto; font-family:'Space Mono',monospace; font-size:1.05rem; letter-spacing:.12em;
     color:var(--accent-dark);
@@ -200,14 +200,18 @@
 
   /* Services teaser + Testimonials + family band shared */
   .cards4{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:8px;}
-  .svc-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:24px; text-align:left;}
+  .svc-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:24px; text-align:left; position:relative;}
   .svc-card .icon{width:44px; height:44px; border-radius:12px; background:var(--mint); display:flex; align-items:center; justify-content:center; margin-bottom:14px;}
-  .svc-card h3{font-family:'Plus Jakarta Sans'; font-size:1.05rem; font-weight:800; margin-bottom:8px;}
+  .svc-card .icon-ph{width:64px; height:64px; border-radius:12px; position:absolute; top:20px; right:20px; border:1px solid var(--line); background:repeating-linear-gradient(135deg, #EDE9F7, #EDE9F7 6px, #E1DAF2 6px, #E1DAF2 12px);}
+  #tips .svc-card{text-align:center;}
+  #tips .svc-card .icon-ph{position:static; margin:0 auto 16px; background:var(--mint); border:none;}
+  #tips .icon-ph img{width:100%; height:100%; object-fit:contain; border-radius:12px; display:block;}
+  .svc-card h3{font-family:'Plus Jakarta Sans'; font-size:1.05rem; font-weight:800; margin:52px 0 8px;}
   .svc-card a.more{font-weight:700; color:var(--accent-dark); font-size:.88rem; text-decoration:none; display:inline-block; margin-top:10px;}
 
   .family-band{
     margin-top:80px; background:var(--primary-dark); color:#fff; border-radius:28px; padding:48px;
-    display:grid; grid-template-columns:.9fr 1.1fr; gap:36px; align-items:center;
+    display:grid; grid-template-columns:1.3fr 1fr; gap:36px; align-items:center;
   }
   .family-band .photo{aspect-ratio:4/3; background:repeating-linear-gradient(135deg,#5A3F7D,#5A3F7D 10px,#654589 10px,#654589 20px);}
   .family-band h2{color:#fff; font-size:2.1rem; line-height:1.15;}
@@ -241,7 +245,7 @@
   .svc-panel{display:none; grid-template-columns:1fr 1fr; gap:44px; align-items:center;}
   .svc-panel.active{display:grid;}
   .svc-panel .photo{aspect-ratio:4/3.3;}
-  .svc-panel[data-panel="restorative"] .photo:has(img),
+  .svc-panel[data-panel="sedation"] .photo:has(img),
   .svc-panel[data-panel="prevention"] .photo:has(img){max-width:75%; margin:0 auto;}
   .svc-panel h3{font-size:1.7rem; margin-bottom:14px;}
   .svc-panel ul{padding-left:0; list-style:none; margin:0;}
@@ -337,7 +341,9 @@
       <a href="#home" class="active">Home</a>
       <a href="#docs">Meet Our Docs</a>
       <a href="#services">Services</a>
+      <a href="#tips">Tooth Tips</a>
       <a href="#forms">Forms</a>
+      <a href="#referring">Referring Doctors</a>
       <a href="#contact">Contact Us</a>
       <a href="#faq">FAQ</a>
     </nav>
@@ -353,9 +359,6 @@
         <span class="eyebrow">Pediatric &amp; Family Dentistry</span>
         <h1>Let our family<br>take care of yours.</h1>
         <p class="lede">A complete family dental office treating patients age one and up — friendly, gentle, and built around what actually makes kids comfortable.</p>
-        <div class="cta-row">
-          <a href="#tour" class="btn ghost">Take the Office Tour</a>
-        </div>
       </div>
       <div class="photo hero-photo"><img src="images/Ham_Fam.JPEG" alt="The Ham family" class="ph" decoding="async" fetchpriority="high"></div>
     </div>
@@ -366,7 +369,6 @@
         <div>
           <span class="eyebrow">Virtual Office Tour</span>
         </div>
-        <a href="#" class="btn ghost">Watch the video tour</a>
       </div>
 
       <div class="slideshow" id="tourShow">
@@ -379,13 +381,9 @@
             <div class="slide-caption">
               <h3 id="tourTitle">Reception Desk</h3>
               <p id="tourNote">Book or check in for an appointment here</p>
-              <span class="slide-counter" id="tourCounter">STOP 1 / 10</span>
             </div>
           </div>
           <button class="slide-arrow" id="tourNext" aria-label="Next stop">›</button>
-        </div>
-        <div class="slide-rail">
-          <div class="stamps" id="tourRail"></div>
         </div>
       </div>
     </div>
@@ -395,40 +393,40 @@
       <div class="tour-head">
         <div>
           <span class="eyebrow">Our Services</span>
-          <h2>Care for every visit</h2>
+          <h2>What makes us unique</h2>
         </div>
         <a href="#services" class="btn ghost">See all services</a>
       </div>
       <div class="cards4">
         <div class="svc-card">
-          <div class="icon">🦷</div>
+          <div class="icon-ph"></div>
           <h3>1st Visit</h3>
           <p style="font-size:.88rem; color:var(--ink-soft);">Infant exams &amp; kindergarten screening</p>
           <a href="#services" class="more">Learn more →</a>
         </div>
         <div class="svc-card">
-          <div class="icon">🛠️</div>
-          <h3>Restorative</h3>
-          <p style="font-size:.88rem; color:var(--ink-soft);">Comfort-first sedation &amp; fillings</p>
-          <a href="#services" class="more">Learn more →</a>
-        </div>
-        <div class="svc-card">
-          <div class="icon">💛</div>
-          <h3>Special Needs</h3>
-          <p style="font-size:.88rem; color:var(--ink-soft);">Customized, patient, judgment-free</p>
-          <a href="#services" class="more">Learn more →</a>
-        </div>
-        <div class="svc-card">
-          <div class="icon">✨</div>
+          <div class="icon-ph"></div>
           <h3>Prevention</h3>
-          <p style="font-size:.88rem; color:var(--ink-soft);">Cleanings, sealants &amp; tooth tips</p>
+          <p style="font-size:.88rem; color:var(--ink-soft);">Dietary counseling</p>
+          <a href="#services" class="more">Learn more →</a>
+        </div>
+        <div class="svc-card">
+          <div class="icon-ph"></div>
+          <h3>Sedation</h3>
+          <p style="font-size:.88rem; color:var(--ink-soft);">Customize sedation levels to ease anxiety</p>
+          <a href="#services" class="more">Learn more →</a>
+        </div>
+        <div class="svc-card">
+          <div class="icon-ph"></div>
+          <h3>Special Needs</h3>
+          <p style="font-size:.88rem; color:var(--ink-soft);">ABA style dentistry, personalized to fit your needs</p>
           <a href="#services" class="more">Learn more →</a>
         </div>
       </div>
     </div>
 
     <div class="family-band">
-      <div class="photo"><span class="tag">PHOTO — swap for updated family/team photo</span></div>
+      <div class="photo"><img src="images/Tokyo-Family-Photographer-105.jpg" alt="The Ham family" class="ph"></div>
       <div>
         <span class="eyebrow" style="color:var(--sun);">Our Promise</span>
         <h2>We treat every patient like family.</h2>
@@ -491,9 +489,9 @@
     </div>
     <div class="svc-tabbar" role="tablist">
       <button class="active" data-tab="visit">1st Visit</button>
-      <button data-tab="restorative">Restorative</button>
-      <button data-tab="special">Special Needs</button>
       <button data-tab="prevention">Prevention</button>
+      <button data-tab="sedation">Sedation</button>
+      <button data-tab="special">Special Needs</button>
     </div>
 
     <div class="svc-panel active" data-panel="visit">
@@ -511,16 +509,33 @@
       </div>
     </div>
 
-    <div class="svc-panel" data-panel="restorative">
+    <div class="svc-panel" data-panel="prevention">
+      <div class="photo"><img src="images/Tooth_Brushing_Itself.JPEG" alt="Child brushing teeth" class="ph" loading="lazy" decoding="async"></div>
+      <div>
+        <h3>Prevention</h3>
+        <ul>
+          <li>Professional dental cleaning</li>
+          <li>Silver diamine fluoride</li>
+          <li>Digital x-ray</li>
+          <li>Tongue-tie / lip-tie consultation</li>
+          <li>Habit counseling</li>
+          <li>Sealants</li>
+          <li>Orthodontic screening</li>
+        </ul>
+        <div class="rename-note">✎ Storyboard flags this tab for a possible rename — confirm final label with client before launch.</div>
+      </div>
+    </div>
+
+    <div class="svc-panel" data-panel="sedation">
       <div class="photo"><img src="images/Dental_Chair.jpg" alt="Dental treatment chair" class="ph" loading="lazy" decoding="async"></div>
       <div>
-        <h3>Restorative</h3>
+        <h3>Sedation</h3>
         <ul>
           <li>Nitrous oxide (laughing gas)</li>
           <li>Moderate oral sedation</li>
           <li>General anesthesia</li>
           <li>Composite fillings</li>
-          <li>SDF "no-shot" numbing</li>
+          <li>SOAN "no-shot" numbing</li>
         </ul>
       </div>
     </div>
@@ -537,24 +552,47 @@
       </div>
     </div>
 
-    <div class="svc-panel" data-panel="prevention">
-      <div class="photo"><img src="images/Tooth_Brushing_Itself.JPEG" alt="Child brushing teeth" class="ph" loading="lazy" decoding="async"></div>
-      <div>
-        <h3>Prevention</h3>
-        <ul>
-          <li>Professional dental cleaning</li>
-          <li>Silver diamine fluoride</li>
-          <li>Digital x-ray</li>
-          <li>Tongue-tie / lip-tie consultation</li>
-          <li>Habit counseling</li>
-          <li>Sealants</li>
-          <li>Orthodontic screening</li>
-          <li>Tooth tips</li>
-        </ul>
-        <div class="rename-note">✎ Storyboard flags this tab for a possible rename — confirm final label with client before launch.</div>
-      </div>
+  </div>
+</section>
+
+<!-- ================= PAGE 3.5 — TOOTH TIPS ================= -->
+<section class="page alt" id="tips">
+  <div class="wrap">
+    <div class="page-kicker">
+      <span class="eyebrow">Tooth Tips</span>
+      <h2>Health tooth tips</h2>
+    </div>
+    <div class="cards4" style="grid-template-columns:repeat(4,1fr);">
+      <div class="svc-card"><div class="icon-ph"><img src="images/tip_wipe.png" alt="Wipe gums icon"></div><p style="font-size:.88rem; color:var(--ink-soft); margin:0;">Wipe your baby's gums with a wet washcloth after feeding, especially before bed</p></div>
+      <div class="svc-card"><div class="icon-ph"><img src="images/tip_notbeforebed.png" alt="No bottle before bed icon"></div><p style="font-size:.88rem; color:var(--ink-soft); margin:0;">Avoid putting your baby to bed with a bottle</p></div>
+      <div class="svc-card"><div class="icon-ph"><img src="images/tip_toothbrush.png" alt="Toothbrush icon"></div><p style="font-size:.88rem; color:var(--ink-soft); margin:0;">Start brushing 2x/day with a soft-bristled toothbrush once the first tooth appears</p></div>
+      <div class="svc-card"><div class="icon-ph"><img src="images/tip_floss.png" alt="Floss icon"></div><p style="font-size:.88rem; color:var(--ink-soft); margin:0;">Start flossing 1x/day any teeth that are touching — it's easier than you think!</p></div>
+      <div class="svc-card"><div class="icon-ph"><img src="images/tip_water.png" alt="Water icon"></div><p style="font-size:.88rem; color:var(--ink-soft); margin:0;">Choose water instead of juice or soda</p></div>
+      <div class="svc-card"><div class="icon-ph"><img src="images/tip_nocandy.png" alt="No candy icon"></div><p style="font-size:.88rem; color:var(--ink-soft); margin:0;">Limit between-meal snacking, especially on sugary or sticky foods</p></div>
+      <div class="svc-card"><div class="icon-ph"><img src="images/tip_gum.png" alt="Xylitol gum icon"></div><p style="font-size:.88rem; color:var(--ink-soft); margin:0;">Choose xylitol (gum, mints, candy, wipes, or gel)</p></div>
+      <div class="svc-card"><div class="icon-ph"><img src="images/tip_team.png" alt="Team brushing icon"></div><p style="font-size:.88rem; color:var(--ink-soft); margin:0;">Team brushing &amp; flossing until age 7 (being able to tie their own shoes is a good indication of independent brushing)</p></div>
     </div>
 
+    <div class="forms-columns" style="margin-top:44px;">
+      <div class="form-box">
+        <h3>What causes cavities?</h3>
+        <p>The main culprit behind tooth decay is bacteria — aka "sugar bugs!" Feeding bacteria more than 3–4x their favorite food of carbohydrates (both healthy and unhealthy — bacteria do not discriminate) lets the bacteria produce acid that breaks down teeth.</p>
+        <div class="photo" style="aspect-ratio:16/5; margin-bottom:4px;"><img src="images/carbs+bacteria=acid.png" alt="Carbs plus bacteria equals acid diagram" class="ph"></div>
+        <p style="text-align:center; font-weight:700; color:var(--ink); margin:0 0 16px;">Carbs + Bacteria = Acid</p>
+        <div class="photo" style="aspect-ratio:16/5; margin-bottom:4px;"><img src="images/acid+healthy_tooth=cavity.png" alt="Acid plus healthy tooth equals cavity diagram" class="ph"></div>
+        <p style="text-align:center; font-weight:700; color:var(--ink); margin:0 0 16px;">Acid + Healthy Tooth = Cavity</p>
+        <p>These bacteria can be passed on to others through saliva, just like cold germs can — please don't share cups, forks, spoons, or toothbrushes.</p>
+        <img src="images/no_sharing.png" alt="No sharing utensils icon" style="width:100px; height:auto; display:block; margin:16px auto 0;">
+      </div>
+      <div class="form-box">
+        <h3>Primary tooth eruption &amp; dental trauma</h3>
+        <div class="photo" style="aspect-ratio:16/10; margin-bottom:16px;"><img src="images/tooth_eruption_chart.png" alt="Primary tooth eruption guide" class="ph"></div>
+        <div class="photo" style="aspect-ratio:16/10; position:relative;">
+          <img src="images/trauma_chart.png" alt="Dental trauma guide" class="ph" style="height:auto; width:100%;">
+          <img src="images/Hurt_Tooth.jpg" alt="Hurt tooth illustration" style="position:absolute; top:8px; right:8px; width:50px; height:auto; border-radius:8px; border:1px solid var(--line);">
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -593,6 +631,27 @@
         <p>Please complete the following Treatment Consent Forms prior to your treatment appointment:</p>
         <ul class="form-links">
           <li><a href="https://yapi.me/co?m=gbovj3muq60qg" target="_blank" rel="noopener">CCCD Treatment Consents Link</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAGE 4.5 — REFERRING DOCTORS ================= -->
+<section class="page alt" id="referring">
+  <div class="wrap">
+    <div class="page-kicker">
+      <span class="eyebrow">Referring Doctors</span>
+      <h2>Thank you for teaming up with us</h2>
+    </div>
+    <div class="forms-columns" style="grid-template-columns:1fr 1.2fr; align-items:center;">
+      <div class="photo"><span class="tag">PHOTO — referral form / office collaboration</span></div>
+      <div class="form-box">
+        <h3>Send Us a Referral</h3>
+        <p>Thank you so much for teaming up with us for the care of your patient!</p>
+        <p>Please print, complete and email the referral form linked below to <a href="mailto:smile@contracostachildrensdentistry.com">smile@contracostachildrensdentistry.com</a> or fax to 925-357-3777.</p>
+        <ul class="form-links">
+          <li><a href="http://www.contracostachildrensdentistry.com/wp/wp-content/uploads/2017/09/cccd_pedo_referral_sheet.pdf" target="_blank" rel="noopener">Download Referral Form PDF</a></li>
         </ul>
       </div>
     </div>
@@ -705,28 +764,14 @@
   const tourImg = document.getElementById('tourImg');
   const tourTitle = document.getElementById('tourTitle');
   const tourNote = document.getElementById('tourNote');
-  const tourCounter = document.getElementById('tourCounter');
-  const tourRail = document.getElementById('tourRail');
-
-  STOPS.forEach((s, n) => {
-    const b = document.createElement('button');
-    b.setAttribute('aria-label', s.title || 'Stop ' + (n + 1));
-    b.innerHTML = '<span class="stamp">' + (n + 1) + '</span><span class="label">' + s.title.replace('&', '&amp;') + '</span>';
-    b.addEventListener('click', () => showStop(n));
-    tourRail.appendChild(b);
-  });
 
   function showStop(n){
     tourIndex = (n + STOPS.length) % STOPS.length;
     const s = STOPS[tourIndex];
     tourImg.src = s.img;
     tourImg.alt = s.alt;
-    tourTitle.innerHTML = s.title.replace('&', '&amp;');
-    tourNote.textContent = s.note;
-    tourCounter.textContent = 'STOP ' + (tourIndex + 1) + ' / ' + STOPS.length + (tourPaused ? ' · PAUSED' : ' · AUTOPLAY');
-    [...tourRail.children].forEach((b, i) => {
-      if(i === tourIndex) b.setAttribute('aria-current','true'); else b.removeAttribute('aria-current');
-    });
+    tourTitle.innerHTML = s.title ? s.title.replace('&', '&amp;') : '&nbsp;';
+    tourNote.textContent = s.note || '\u00a0';
     restartTimer();
   }
   function restartTimer(){
@@ -736,11 +781,8 @@
   }
   document.getElementById('tourPrev').addEventListener('click', () => showStop(tourIndex - 1));
   document.getElementById('tourNext').addEventListener('click', () => showStop(tourIndex + 1));
-  ['mouseenter','focusin'].forEach(ev => tourShow.addEventListener(ev, () => { tourPaused = true; clearTimeout(tourTimer); showStopLabelOnly(); }));
-  ['mouseleave','focusout'].forEach(ev => tourShow.addEventListener(ev, () => { tourPaused = false; showStopLabelOnly(); restartTimer(); }));
-  function showStopLabelOnly(){
-    tourCounter.textContent = 'STOP ' + (tourIndex + 1) + ' / ' + STOPS.length + (tourPaused ? ' · PAUSED' : ' · AUTOPLAY');
-  }
+  ['mouseenter','focusin'].forEach(ev => tourShow.addEventListener(ev, () => { tourPaused = true; clearTimeout(tourTimer); }));
+  ['mouseleave','focusout'].forEach(ev => tourShow.addEventListener(ev, () => { tourPaused = false; restartTimer(); }));
   showStop(0);
 
   /* ---------- Services tabs ---------- */
