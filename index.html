@@ -117,8 +117,9 @@
   /* ---------- Top nav ---------- */
   header.site{position:sticky; top:0; z-index:50; background:rgba(245,242,250,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
   .nav-row{display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:1180px; margin:0 auto; gap:16px;}
-  .logo{font-family:'Fredoka'; font-weight:700; font-size:1.35rem; color:var(--primary-dark); display:flex; align-items:center; gap:8px; white-space:nowrap;}
-  .logo svg{flex:none;}
+  .logo{display:flex; align-items:center; flex:none; text-decoration:none;}
+  .logo img{height:78px; width:auto; display:block; mix-blend-mode:multiply;}
+  @media (max-width:520px){ .logo img{height:56px;} }
   nav.tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;}
   nav.tabs a{
     font-weight:700; font-size:.86rem; padding:9px 16px; border-radius:12px; border:2px solid var(--primary-dark);
@@ -136,9 +137,11 @@
   /* ===== PAGE 1 : HOME ===== */
   .hero{padding:38px 0 10px;}
   .addr-line{
-    font-family:'Space Mono',monospace; font-weight:700; font-size:1.05rem; letter-spacing:.02em;
+    font-family:'Fredoka', sans-serif; font-weight:600; font-size:1.5rem; letter-spacing:.02em;
     color:var(--primary-dark); text-align:center; margin-bottom:22px;
   }
+  a.addr-line{display:block; text-decoration:none; transition:.15s;}
+  a.addr-line:hover{color:var(--accent-dark);}
   .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:36px; align-items:center;}
   .hero h1{font-size:3rem; line-height:1.08; margin-bottom:18px;}
   .hero p.lede{font-size:1.15rem; color:var(--ink-soft); max-width:46ch;}
@@ -224,7 +227,9 @@
   .doc-card .body{padding:28px;}
   .doc-card h3{font-size:1.4rem; font-family:'Fredoka'; color:var(--primary-dark);}
   .doc-card .role{font-family:'Space Mono',monospace; font-size:.78rem; color:var(--accent-dark); margin:6px 0 14px;}
-  .doc-card p.bio{color:var(--ink-soft); font-size:.95rem;}
+  .doc-card p.bio{color:var(--ink-soft); font-size:.95rem; margin:0 0 12px;}
+  .doc-card p.bio:last-child{margin-bottom:0;}
+  .doc-card .photo:has(img){align-items:flex-start;}
 
   /* ===== PAGE 3 : SERVICES ===== */
   .svc-tabbar{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:34px;}
@@ -325,10 +330,9 @@
 
 <header class="site">
   <div class="nav-row">
-    <div class="logo">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 5 4.5 5 8.5c0 3 1.4 4.6 1.9 7.8.3 2 .6 4.7 2.6 4.7 1.7 0 1.7-2.6 1.9-4.3.1-1 .3-1.7 1-1.7s.9.7 1 1.7c.2 1.7.2 4.3 1.9 4.3 2 0 2.3-2.7 2.6-4.7C18.6 13.1 20 11.5 20 8.5 20 4.5 17 2 13 2h-1z" stroke="#6B4E90" stroke-width="1.5"/></svg>
-      CCCD
-    </div>
+    <a class="logo" href="#home" aria-label="Contra Costa Children's Dentistry — home">
+      <img src="images/cccd_logo.jpg" alt="Contra Costa Children's Dentistry">
+    </a>
     <nav class="tabs">
       <a href="#home" class="active">Home</a>
       <a href="#docs">Meet Our Docs</a>
@@ -343,7 +347,7 @@
 <!-- ================= PAGE 1 — HOME ================= -->
 <section class="page" id="home">
   <div class="wrap hero">
-    <div class="addr-line">355 LENNON LN, #215 · WALNUT CREEK, CA 94598</div>
+    <a class="addr-line" href="#contact">355 LENNON LN, #215 · WALNUT CREEK, CA 94598</a>
     <div class="hero-grid">
       <div>
         <span class="eyebrow">Pediatric &amp; Family Dentistry</span>
@@ -370,12 +374,12 @@
           <button class="slide-arrow" id="tourPrev" aria-label="Previous stop">‹</button>
           <div style="flex:1; min-width:0;">
             <div class="slide-viewer">
-              <img id="tourImg" src="images/Reception_and_Waiting.jpg" alt="Reception and waiting area with arcade games" class="ph">
+              <img id="tourImg" src="images/Front_Desk.jpg" alt="Reception desk at check-in" class="ph">
             </div>
             <div class="slide-caption">
-              <h3 id="tourTitle">Reception &amp; Waiting</h3>
-              <p id="tourNote">Arcade games while you wait</p>
-              <span class="slide-counter" id="tourCounter">STOP 1 / 5</span>
+              <h3 id="tourTitle">Reception Desk</h3>
+              <p id="tourNote">Book or check in for an appointment here</p>
+              <span class="slide-counter" id="tourCounter">STOP 1 / 10</span>
             </div>
           </div>
           <button class="slide-arrow" id="tourNext" aria-label="Next stop">›</button>
@@ -457,17 +461,21 @@
       <div class="doc-card">
         <div class="photo"><img src="images/THam_headshot.jpg" alt="Dr. Tiffany Ham, pediatric dentist" class="ph" loading="lazy" decoding="async"></div>
         <div class="body">
-          <h3>Dr. Tiffany Ham</h3>
-          <div class="role">PEDIATRIC DENTIST</div>
-          <p class="bio">[Bio placeholder — background, training, and what drew Dr. Ham to pediatric dentistry.]<span class="draft-tag">✎ Real bio still needed</span></p>
+          <h3>Tiffany H. Ham, D.D.S., M.S.</h3>
+          <div class="role">BOARD CERTIFIED PEDIATRIC DENTIST</div>
+          <p class="bio">Dr. Tiffany is excited to be teaming up with Dr. Alexander Ham to help make your child's dental visits happy and magical. Her bubbly personality helps children feel at ease when they come in for their dental appointments. Dr. Tiffany grew up in Concord and is a Northgate High School Alumni (Go Broncos!). She received her B.A. in Molecular and Cell Biology from the University of California, Berkeley. At the University of California, San Francisco (UCSF) School of Dentistry, she earned her D.D.S. and was elected to the National Dental Honor Society of Omicron Kappa Upsilon (OKU). She continued her studies at UCSF and completed a three-year combined Master's-Pediatric dental residency with a M.S. in Oral and Craniofacial Sciences. Dr. Tiffany is a Diplomate of the American Board of Pediatric Dentistry and was recognized as a Pugh Award recipient for performing among the top 3% of Pediatric Dentists nationally.</p>
+          <p class="bio">Dr. Tiffany has served as a Board Director for the California Society of Pediatric Dentistry. She is a proud member of the American Board of Pediatric Dentistry, American Academy of Pediatric Dentistry, California Society of Pediatric Dentistry, American Dental Association, California Dental Association, and Contra Costa Dental Society.</p>
+          <p class="bio">She has volunteered with various Bay Area community dental clinics and served on a dental mission trip to China with Alliance for Smiles. She is fluent in Mandarin.</p>
         </div>
       </div>
       <div class="doc-card">
         <div class="photo"><img src="images/AHam_headshot.jpg" alt="Dr. Alex Ham, pediatric dentist" class="ph" loading="lazy" decoding="async"></div>
         <div class="body">
-          <h3>Dr. Alex Ham</h3>
-          <div class="role">PEDIATRIC DENTIST</div>
-          <p class="bio">[Bio placeholder — background, training, and approach to treating kids.]<span class="draft-tag">✎ Real bio still needed</span></p>
+          <h3>Alexander Ham, D.D.S.</h3>
+          <div class="role">GENERAL DENTIST</div>
+          <p class="bio">Dr. Alexander Ham was born and raised in Oakland. He received his B.S. degree in Genetics at the University of California, Davis. He then attended the University of California, San Francisco (UCSF) School of Dentistry and also became a commissioned officer in the US Air Force. After graduating from UCSF, Dr. Ham completed an Advanced Education in General Dentistry residency at Sheppard AFB, Texas where he was the Chief Resident. Dr. Ham served as a US Air Force dentist for 4 years, having held the rank of Captain, and was the Chief of Clinical Dentistry at Edwards AFB, California. He currently serves as an Air Force Reservist.</p>
+          <p class="bio">Dr. Ham is a proud member of the American Dental Association, California Dental Association, and the Contra Costa Dental Society.</p>
+          <p class="bio">He and his wife, Dr. Tiffany H. Ham, live in Concord with their daughter, Zoey, and enjoy traveling, snowboarding, and spending time with family and friends. He also speaks Cantonese.</p>
         </div>
       </div>
     </div>
@@ -679,11 +687,16 @@
 <script>
   /* ---------- Office tour slideshow ---------- */
   const STOPS = [
-    {title:'Reception & Waiting', note:'Arcade games while you wait', img:'images/Reception_and_Waiting.jpg', alt:'Reception and waiting area with arcade games'},
-    {title:'Play Room', note:'A room built just for kids', img:'images/Playroom.jpg', alt:'Play room with toy kitchen and reading bench'},
-    {title:'Open Bay', note:'Movies during check-ups', img:'images/Open_Bay.jpg', alt:'Open bay treatment area with ceiling screens'},
-    {title:'Consult Room', note:'One-on-one with your doctor', img:'images/Consult_Room.jpg', alt:'Consult room with window bench and toys'},
-    {title:'Prize Tower', note:'Every visit ends here', img:'images/Prize_Tower.jpg', alt:'Prize tower with balloons'}
+    {title:'Reception Desk', note:'Book or check in for an appointment here', img:'images/Front_Desk.jpg', alt:'Reception desk at check-in'},
+    {title:'Waiting Room', note:'Play in our arcade before your appointment', img:'images/Reception_and_Waiting.jpg', alt:'Waiting room with arcade games'},
+    {title:'Play House', note:'Read books or "cook" in our playhouse', img:'images/Play_House.jpg', alt:'Playhouse nook off the hallway'},
+    {title:'', note:'', img:'images/Playroom.jpg', alt:'Play room with toy kitchen and reading bench'},
+    {title:'Open Bay', note:'Watch a movie during your check up', img:'images/Open_Bay.jpg', alt:'Open bay treatment area with ceiling screens'},
+    {title:'', note:'', img:'images/Toy_Tower.jpg', alt:'Toy tower in the treatment area'},
+    {title:'Consult Room', note:'Baby consult room for a quieter environment', img:'images/Consult_Room.jpg', alt:'Baby consult room with window bench and toys'},
+    {title:'Private Rooms', note:'Private rooms for treatment or special needs', img:'images/Private_OP2_Hallway.jpg', alt:'Hallway to the private treatment rooms'},
+    {title:'', note:'', img:'images/Dental_Chair.jpg', alt:'Private room dental chair'},
+    {title:'Prize Tower', note:'Prizes and balloons at the end of your appointment', img:'images/Prize_Tower.jpg', alt:'Prize tower with balloons'}
   ];
   const AUTOPLAY_MS = 5000;
   let tourIndex = 0, tourTimer = null, tourPaused = false;
@@ -697,7 +710,7 @@
 
   STOPS.forEach((s, n) => {
     const b = document.createElement('button');
-    b.setAttribute('aria-label', s.title);
+    b.setAttribute('aria-label', s.title || 'Stop ' + (n + 1));
     b.innerHTML = '<span class="stamp">' + (n + 1) + '</span><span class="label">' + s.title.replace('&', '&amp;') + '</span>';
     b.addEventListener('click', () => showStop(n));
     tourRail.appendChild(b);
