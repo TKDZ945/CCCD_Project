@@ -126,7 +126,12 @@
     text-decoration:none; color:var(--primary-dark); background:var(--surface); transition:.15s;
   }
   nav.tabs a:hover, nav.tabs a.active{background:var(--primary-dark); color:#fff;}
-  nav.tabs a:focus-visible, a:focus-visible, button:focus-visible{outline:3px solid var(--accent); outline-offset:2px;}
+  a:focus-visible, button:focus-visible, img.ph:focus-visible{outline:3px solid var(--accent-dark); outline-offset:2px;}
+  .skip-link{
+    position:absolute; left:12px; top:-60px; z-index:200; background:var(--primary-dark); color:#fff;
+    padding:12px 18px; border-radius:10px; font-weight:700; text-decoration:none; transition:top .15s;
+  }
+  .skip-link:focus{top:12px;}
 
   /* ---------- Page sections ---------- */
   section.page{padding:64px 0 88px; scroll-margin-top:84px; display:none;}
@@ -151,8 +156,8 @@
     display:inline-flex; align-items:center; gap:8px; font-weight:700; padding:14px 26px; border-radius:14px;
     border:none; text-decoration:none; font-size:.98rem;
   }
-  .btn.primary{background:var(--accent); color:#fff;}
-  .btn.primary:hover{background:var(--accent-dark);}
+  .btn.primary{background:var(--accent); color:var(--primary-dark);}
+  .btn.primary:hover{background:var(--accent-dark); color:var(--primary-dark);}
   .btn.ghost{background:transparent; border:2px solid var(--primary-dark); color:var(--primary-dark); transition:.15s;}
   .btn.ghost:hover{background:var(--primary-dark); color:#fff;}
   .hero-photo{aspect-ratio:4/3.1;}
@@ -170,9 +175,9 @@
   .slide-arrow:hover{background:var(--primary-dark); color:#fff;}
   .slide-viewer{
     flex:1; min-width:0; background:var(--mint); border:1px solid var(--line); border-radius:16px;
-    padding:6px; height:460px; display:flex; align-items:center; justify-content:center;
+    padding:6px; height:640px; max-width:480px; margin:0 auto; display:flex; align-items:center; justify-content:center;
   }
-  .slide-viewer img{max-width:100%; max-height:100%; object-fit:contain; display:block; border-radius:8px; cursor:zoom-in;}
+  .slide-viewer img{max-width:100%; max-height:100%; width:100%; height:100%; object-fit:cover; display:block; border-radius:8px; cursor:zoom-in;}
   .slide-caption{display:flex; align-items:baseline; gap:12px; margin-top:14px; flex-wrap:wrap; min-height:1.05rem;}
   .slide-caption h3{font-family:'Plus Jakarta Sans'; font-size:1.05rem; font-weight:800; color:var(--ink); min-height:1.2em;}
   .slide-caption p{margin:0; font-size:.85rem; color:var(--ink-soft); min-height:1.2em;}
@@ -318,7 +323,7 @@
     .nav-row{flex-direction:column; align-items:flex-start;}
     nav.tabs{justify-content:flex-start;}
     .hero h1{font-size:2.2rem;}
-    .slide-viewer{height:320px;}
+    .slide-viewer{height:420px; max-width:100%;}
     .slide-rail .label{display:none;}
   }
   @media (max-width:520px){
@@ -329,9 +334,17 @@
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;} .faq-a{transition:none;}
   }
+  .tour-pause{
+    width:44px; height:44px; border-radius:50%; flex:none; background:var(--surface);
+    border:2px solid var(--primary-dark); color:var(--primary-dark); font-size:1rem; font-weight:800;
+    display:flex; align-items:center; justify-content:center; transition:.15s;
+  }
+  .tour-pause:hover{background:var(--primary-dark); color:#fff;}
 </style>
 </head>
 <body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
 
 <header class="site">
   <div class="nav-row">
@@ -351,6 +364,7 @@
   </div>
 </header>
 
+<main id="main">
 <!-- ================= PAGE 1 — HOME ================= -->
 <section class="page" id="home">
   <div class="wrap hero">
@@ -379,12 +393,13 @@
             <div class="slide-viewer">
               <img id="tourImg" src="images/Front_Desk.jpg" alt="Reception desk at check-in" class="ph">
             </div>
-            <div class="slide-caption">
+            <div class="slide-caption" aria-live="polite">
               <h3 id="tourTitle">Reception Desk</h3>
               <p id="tourNote">Book or check in for an appointment here</p>
             </div>
           </div>
           <button class="slide-arrow" id="tourNext" aria-label="Next stop">›</button>
+          <button class="tour-pause" id="tourPause" aria-label="Pause automatic slideshow" aria-pressed="false">⏸</button>
         </div>
       </div>
     </div>
@@ -418,7 +433,7 @@
           <a href="#services" class="more">Learn more →</a>
         </div>
         <div class="svc-card">
-          <div class="icon-ph" style="width:116px; height:116px;"></div>
+          <div class="icon-ph"></div>
           <h3>Special Needs</h3>
           <p style="font-size:.88rem; color:var(--ink-soft);">ABA style dentistry, personalized to fit your needs</p>
           <a href="#services" class="more">Learn more →</a>
@@ -441,9 +456,9 @@
         <h2>From our Google reviews</h2>
       </div>
       <div class="cards4" style="grid-template-columns:repeat(3,1fr); align-items:start;">
-        <div class="testi-card"><div class="stars">★★★★★</div><p>"Both my children have been patients of Doctor Ham for years! FRIENDLY staff, welcoming environment, excellent care. Would recommend to anyone. My kids actually get excited when i tell them we are going for a visit"</p><div class="who">— Jody G.</div></div>
-        <div class="testi-card"><div class="stars">★★★★★</div><p>"Dr. Tiffany Ham's office is a close second to Disneyland! Her office is fun, bright, and thoughtful for a childs dental office! Her crew is so sweet, helpful, and most important is the joyful attitudes, from the moment you step into the lobby and throughout, everyone working here makes you try to be as comfortable, at ease, and considered as possible. They skillfully and lovingly care for all three of my kids when we come for our dentistry needs. I'm unbelievablely grateful for this team, highly recommend this place, and truly can't thank them enough for their care!"</p><div class="who">— Sarah R.</div></div>
-        <div class="testi-card"><div class="stars">★★★★★</div><p>"The best kids dentist! My daughter is scared all the time of the dentist and they took the time and care to engage with her a make her comeback. Also went for the least invasive treatment option. Highly recommend."</p><div class="who">— Amanda</div></div>
+        <div class="testi-card"><div class="stars">★★★★★</div><p>"Both my children have been patients of Doctor Ham for years! <strong>FRIENDLY</strong> staff, <strong>welcoming</strong> environment, <strong>excellent</strong> care. Would recommend to anyone. My kids actually get <strong>excited</strong> when i tell them we are going for a visit"</p><div class="who">— Jody G.</div></div>
+        <div class="testi-card"><div class="stars">★★★★★</div><p>"Dr. Tiffany Ham's office is a close second to <strong>Disneyland</strong>! Her office is <strong>fun, bright, and thoughtful</strong> for a childs dental office! Her crew is so sweet, helpful, and most important is the <strong>joyful attitudes</strong>, from the moment you step into the lobby and throughout, everyone working here makes you try to be as <strong>comfortable</strong>, at ease, and considered as possible. They <strong>skillfully</strong> and <strong>lovingly care</strong> for all three of my kids when we come for our dentistry needs. I'm unbelievablely grateful for this team, highly recommend this place, and truly can't thank them enough for their care!"</p><div class="who">— Sarah R.</div></div>
+        <div class="testi-card"><div class="stars">★★★★★</div><p>"The best kids dentist! My daughter is scared all the time of the dentist and they <strong>took the time and care</strong> to engage with her and make her comeback. Also went for the <strong>least invasive</strong> treatment option. Highly recommend."</p><div class="who">— Amanda</div></div>
       </div>
     </div>
   </div>
@@ -462,7 +477,7 @@
         <div class="body">
           <h3>Tiffany H. Ham, D.D.S., M.S.</h3>
           <div class="role">BOARD CERTIFIED PEDIATRIC DENTIST</div>
-          <p class="bio">Dr. Tiffany is excited to be teaming up with Dr. Alexander Ham to help make your child's dental visits happy and magical. Her bubbly personality helps children feel at ease when they come in for their dental appointments. Dr. Tiffany grew up in Concord and is a Northgate High School Alumni (Go Broncos!). She received her B.A. in Molecular and Cell Biology from the University of California, Berkeley. At the University of California, San Francisco (UCSF) School of Dentistry, she earned her D.D.S. and was elected to the National Dental Honor Society of Omicron Kappa Upsilon (OKU). She continued her studies at UCSF and completed a three-year combined Master's-Pediatric dental residency with a M.S. in Oral and Craniofacial Sciences. Dr. Tiffany is a Diplomate of the American Board of Pediatric Dentistry and was recognized as a Pugh Award recipient for performing among the top 3% of Pediatric Dentists nationally.</p>
+          <p class="bio">Dr. Tiffany is excited to be teaming up with you to help make your child's dental visits happy and magical. Her bubbly personality helps children feel at ease when they come in for their dental appointments. Dr. Tiffany grew up in Concord and is a Northgate High School Alumni (Go Broncos!). She received her B.A. in Molecular and Cell Biology from the University of California, Berkeley. At the University of California, San Francisco (UCSF) School of Dentistry, she earned her D.D.S. and was elected to the National Dental Honor Society of Omicron Kappa Upsilon (OKU). She continued her studies at UCSF and completed a three-year combined Master's-Pediatric dental residency with a M.S. in Oral and Craniofacial Sciences. Dr. Tiffany is a Diplomate of the American Board of Pediatric Dentistry and was recognized as a Pugh Award recipient for performing among the top 3% of Pediatric Dentists nationally. Outside of the office, she plays an active role in the pediatric dental community and is a Fellow of the American Academy of Pediatric Dentistry.</p>
           <p class="bio">Dr. Tiffany has served as a Board Director for the California Society of Pediatric Dentistry. She is a proud member of the American Board of Pediatric Dentistry, American Academy of Pediatric Dentistry, California Society of Pediatric Dentistry, American Dental Association, California Dental Association, and Contra Costa Dental Society.</p>
           <p class="bio">She has volunteered with various Bay Area community dental clinics and served on a dental mission trip to China with Alliance for Smiles. She is fluent in Mandarin.</p>
         </div>
@@ -488,14 +503,14 @@
       <span class="eyebrow">Our Services</span>
       <h2>Care built around your child</h2>
     </div>
-    <div class="svc-tabbar" role="tablist">
-      <button class="active" data-tab="visit">1st Visit</button>
-      <button data-tab="prevention">Prevention</button>
-      <button data-tab="sedation">Sedation</button>
-      <button data-tab="special">Special Needs</button>
+    <div class="svc-tabbar" role="tablist" aria-label="Service categories">
+      <button class="active" role="tab" aria-selected="true" aria-controls="panel-visit" id="tab-visit" data-tab="visit">1st Visit</button>
+      <button role="tab" aria-selected="false" aria-controls="panel-prevention" id="tab-prevention" data-tab="prevention">Prevention</button>
+      <button role="tab" aria-selected="false" aria-controls="panel-sedation" id="tab-sedation" data-tab="sedation">Sedation</button>
+      <button role="tab" aria-selected="false" aria-controls="panel-special" id="tab-special" data-tab="special">Special Needs</button>
     </div>
 
-    <div class="svc-panel active" data-panel="visit">
+    <div class="svc-panel active" data-panel="visit" role="tabpanel" id="panel-visit" aria-labelledby="tab-visit">
       <div class="photo"><img src="images/Infant_1st_visit.jpg" alt="Infant first dental visit" class="ph" loading="lazy" decoding="async"></div>
       <div>
         <h3>1st Visit</h3>
@@ -510,7 +525,7 @@
       </div>
     </div>
 
-    <div class="svc-panel" data-panel="prevention">
+    <div class="svc-panel" data-panel="prevention" role="tabpanel" id="panel-prevention" aria-labelledby="tab-prevention">
       <div class="photo"><img src="images/Tooth_Brushing_Itself.JPEG" alt="Child brushing teeth" class="ph" loading="lazy" decoding="async"></div>
       <div>
         <h3>Prevention</h3>
@@ -527,8 +542,8 @@
       </div>
     </div>
 
-    <div class="svc-panel" data-panel="sedation">
-      <div class="photo"><img src="images/Dental_Chair.jpg" alt="Dental treatment chair" class="ph" loading="lazy" decoding="async"></div>
+    <div class="svc-panel" data-panel="sedation" role="tabpanel" id="panel-sedation" aria-labelledby="tab-sedation">
+      <div class="photo"><img src="images/Dr._Tiff_next_to_chair.jpg" alt="Illustrated dentist standing beside a treatment chair with a smiling tooth" class="ph" loading="lazy" decoding="async"></div>
       <div>
         <h3>Sedation</h3>
         <ul>
@@ -541,9 +556,9 @@
       </div>
     </div>
 
-    <div class="svc-panel" data-panel="special">
-      <div class="photo"><img src="images/Dental_Storyboard.jpeg" alt="Going to the Dentist social story for special needs patients" class="ph" loading="lazy" decoding="async"></div>
-      <div>
+    <div class="svc-panel" data-panel="special" role="tabpanel" id="panel-special" aria-labelledby="tab-special">
+      <div class="photo" style="grid-column:1/-1; aspect-ratio:21/9;"><img src="images/Dental_Storyboard.jpeg" alt="Going to the Dentist social story for special needs patients" class="ph" loading="lazy" decoding="async"></div>
+      <div style="grid-column:1/-1;">
         <h3>Special Needs</h3>
         <ul>
           <li>Social visits</li>
@@ -611,13 +626,12 @@
   <div class="wrap">
     <div class="page-kicker">
       <span class="eyebrow">Forms</span>
-      <h2>Handled before you arrive</h2>
     </div>
     <div class="forms-intro">
       <p>"Thank you for completing your patient paperwork prior to your appointment so we can spend more time getting to know you and addressing your needs efficiently."</p>
       <span class="draft-tag">✎ Storyboard note: replace with exact copy from the current site.</span>
     </div>
-    <div class="photo forms-photo"><span class="tag">PHOTO — front desk check-in, paperwork already done</span></div>
+    <div class="photo forms-photo"><img src="images/forms.PNG" alt="Welcome illustration of a smiling receptionist holding a clipboard" class="ph"></div>
     <div class="forms-columns">
       <div class="form-box">
         <h3>New Patient Forms</h3>
@@ -654,8 +668,8 @@
       <span class="eyebrow">Referring Doctors</span>
       <h2>Thank you for teaming up with us</h2>
     </div>
-    <div class="forms-columns" style="grid-template-columns:1fr 1.2fr; align-items:center;">
-      <div class="photo"><span class="tag">PHOTO — referral form / office collaboration</span></div>
+    <div class="forms-columns" style="grid-template-columns:1fr; align-items:center; max-width:760px; margin:0 auto;">
+      <div class="photo" style="aspect-ratio:2/1;"><img src="images/Referring_doctors.PNG" alt="Illustration of four smiling doctors in white coats" class="ph"></div>
       <div class="form-box">
         <h3>Send Us a Referral</h3>
         <p>Thank you so much for teaming up with us for the care of your patient!</p>
@@ -716,32 +730,34 @@
     </div>
     <div class="faq-list" id="faqList">
       <div class="faq-item">
-        <button class="faq-q"><span>What is a pediatric dentist?</span><span class="plus">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">A pediatric dentist completes extra training beyond dental school focused on infants, children, and teens, including kids with special needs.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-1" id="faq-q-1"><span>What is a pediatric dentist?</span><span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1"><div class="faq-a-inner">A pediatric dentist completes extra training beyond dental school focused on infants, children, and teens, including kids with special needs.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q"><span>What age should I bring my child to the dentist?</span><span class="plus">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Most guidelines recommend a first visit by age one, or within six months of the first tooth coming in.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2" id="faq-q-2"><span>What age should I bring my child to the dentist?</span><span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2"><div class="faq-a-inner">Most guidelines recommend a first visit by age one, or within six months of the first tooth coming in.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q"><span>How do I prevent cavities?</span><span class="plus">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Regular brushing, limiting sugary snacks and drinks, and routine cleanings are the biggest factors.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-3" id="faq-q-3"><span>How do I prevent cavities?</span><span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3"><div class="faq-a-inner">Regular brushing, limiting sugary snacks and drinks, and routine cleanings are the biggest factors.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q"><span>What if my child's teeth look crowded ("double parked")?</span><span class="plus">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Crowding is common while jaws are still growing — we'll monitor it and recommend an orthodontic screening if needed.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-4" id="faq-q-4"><span>What if my child's teeth look crowded ("double parked")?</span><span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-a-4" role="region" aria-labelledby="faq-q-4"><div class="faq-a-inner">Crowding is common while jaws are still growing — we'll monitor it and recommend an orthodontic screening if needed.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q"><span>Are wiggly teeth normal?</span><span class="plus">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Yes — it's a normal sign that a baby tooth is making room for the permanent tooth underneath.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-5" id="faq-q-5"><span>Are wiggly teeth normal?</span><span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-a-5" role="region" aria-labelledby="faq-q-5"><div class="faq-a-inner">Yes — it's a normal sign that a baby tooth is making room for the permanent tooth underneath.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q"><span>What kind of toothpaste should my child use?</span><span class="plus">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">A fluoride toothpaste appropriate for their age, in a rice-grain to pea-sized amount — we're happy to recommend a brand at your visit.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-6" id="faq-q-6"><span>What kind of toothpaste should my child use?</span><span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-a-6" role="region" aria-labelledby="faq-q-6"><div class="faq-a-inner">A fluoride toothpaste appropriate for their age, in a rice-grain to pea-sized amount — we're happy to recommend a brand at your visit.<span class="draft-tag">✎ Draft copy — confirm before publishing</span></div></div>
       </div>
     </div>
   </div>
 </section>
+
+</main>
 
 <footer class="site">
   <div class="wrap">Contra Costa Children's Dentistry · 355 Lennon Ln, #215, Walnut Creek, CA 94598 · <a href="tel:+19254826223">(925) 482-6223</a></div>
@@ -767,7 +783,7 @@
     {title:'', note:'', img:'images/Dental_Chair.jpg', alt:'Private room dental chair'},
     {title:'Prize Tower', note:'Prizes and balloons at the end of your appointment', img:'images/Prize_Tower.jpg', alt:'Prize tower with balloons'}
   ];
-  const AUTOPLAY_MS = 3000;
+  const AUTOPLAY_MS = 2000;
   let tourIndex = 0, tourTimer = null, tourPaused = false;
 
   const tourShow = document.getElementById('tourShow');
@@ -780,6 +796,7 @@
     const s = STOPS[tourIndex];
     tourImg.src = s.img;
     tourImg.alt = s.alt;
+    if(window.__cccdPrewarm) window.__cccdPrewarm(s.img);
     tourTitle.innerHTML = s.title ? s.title.replace('&', '&amp;') : '&nbsp;';
     tourNote.textContent = s.note || '\u00a0';
     restartTimer();
@@ -791,26 +808,98 @@
   }
   document.getElementById('tourPrev').addEventListener('click', () => showStop(tourIndex - 1));
   document.getElementById('tourNext').addEventListener('click', () => showStop(tourIndex + 1));
-  ['mouseenter','focusin'].forEach(ev => tourShow.addEventListener(ev, () => { tourPaused = true; clearTimeout(tourTimer); }));
-  ['mouseleave','focusout'].forEach(ev => tourShow.addEventListener(ev, () => { tourPaused = false; restartTimer(); }));
+  const tourPauseBtn = document.getElementById('tourPause');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(prefersReducedMotion) tourPaused = true;
+  function setPauseUI(){
+    tourPauseBtn.textContent = tourPaused ? '▶' : '⏸';
+    tourPauseBtn.setAttribute('aria-label', tourPaused ? 'Play automatic slideshow' : 'Pause automatic slideshow');
+    tourPauseBtn.setAttribute('aria-pressed', tourPaused ? 'true' : 'false');
+  }
+  tourPauseBtn.addEventListener('click', () => { tourPaused = !tourPaused; setPauseUI(); restartTimer(); });
+  setPauseUI();
+  ['mouseenter','focusin'].forEach(ev => tourShow.addEventListener(ev, () => { clearTimeout(tourTimer); }));
+  ['mouseleave','focusout'].forEach(ev => tourShow.addEventListener(ev, () => { if(!tourPaused) restartTimer(); }));
   showStop(0);
+
+  /* ---------- Watermark: invisible while browsing, baked in only at the moment
+     someone tries to save/drag an image (right-click or drag), reverted right after ---------- */
+  (function(){
+    const LOGO_SRC = 'images/cccd_logo.jpg';
+    const cache = new Map();
+    let logoImg = null;
+    function loadImg(src){
+      return new Promise((res, rej) => {
+        const im = new Image();
+        im.crossOrigin = 'anonymous';
+        im.onload = () => res(im);
+        im.onerror = rej;
+        im.src = src;
+      });
+    }
+    function watermark(src){
+      if(cache.has(src)) return Promise.resolve(cache.get(src));
+      return loadImg(src).then(im => {
+        const c = document.createElement('canvas');
+        c.width = im.naturalWidth; c.height = im.naturalHeight;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(im, 0, 0);
+        const lw = Math.max(70, c.width * 0.16);
+        const lh = lw * (logoImg.naturalHeight / logoImg.naturalWidth);
+        ctx.globalAlpha = 0.25;
+        for(let y = -lh; y < c.height + lh; y += lh * 2.1){
+          for(let x = -lw; x < c.width + lw; x += lw * 2.1){
+            ctx.drawImage(logoImg, x, y, lw, lh);
+          }
+        }
+        ctx.globalAlpha = 1;
+        const url = c.toDataURL('image/jpeg', 0.92);
+        cache.set(src, url);
+        return url;
+      });
+    }
+    let revertTimer = null;
+    function armSwap(img){
+      const orig = img.getAttribute('data-orig') || img.getAttribute('src');
+      if(!img.getAttribute('data-orig')) img.setAttribute('data-orig', orig);
+      watermark(orig).then(url => { img.src = url; });
+      clearTimeout(revertTimer);
+      revertTimer = setTimeout(() => { img.src = orig; }, 4000);
+    }
+    function revert(img){
+      const orig = img.getAttribute('data-orig');
+      if(orig) img.src = orig;
+      clearTimeout(revertTimer);
+    }
+    loadImg(LOGO_SRC).then(im => {
+      logoImg = im;
+      document.querySelectorAll('img.ph').forEach(img => watermark(img.getAttribute('src')));
+      window.__cccdPrewarm = watermark;
+      document.addEventListener('contextmenu', (e) => { if(e.target.matches('img.ph')) armSwap(e.target); }, true);
+      document.addEventListener('dragstart', (e) => { if(e.target.matches('img.ph')) armSwap(e.target); }, true);
+      document.addEventListener('dragend', (e) => { if(e.target.matches('img.ph')) revert(e.target); }, true);
+      document.querySelectorAll('img.ph').forEach(img => img.addEventListener('mouseleave', () => revert(img)));
+    }).catch(() => {});
+  })();
 
   /* ---------- Services tabs ---------- */
   document.querySelectorAll('.svc-tabbar button').forEach(btn=>{
     btn.addEventListener('click', ()=>{
-      document.querySelectorAll('.svc-tabbar button').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.svc-tabbar button').forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
       document.querySelectorAll('.svc-panel').forEach(p=>p.classList.remove('active'));
       btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
       document.querySelector('.svc-panel[data-panel="'+btn.dataset.tab+'"]').classList.add('active');
     });
   });
 
   /* ---------- FAQ accordion ---------- */
   document.querySelectorAll('.faq-item').forEach(item=>{
-    item.querySelector('.faq-q').addEventListener('click', ()=>{
+    const q = item.querySelector('.faq-q');
+    q.addEventListener('click', ()=>{
       const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-      if(!isOpen) item.classList.add('open');
+      document.querySelectorAll('.faq-item').forEach(i=>{ i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+      if(!isOpen){ item.classList.add('open'); q.setAttribute('aria-expanded','true'); }
     });
   });
 
@@ -821,6 +910,7 @@
     if(!document.getElementById(id)) id = 'home';
     pages.forEach(s=>s.classList.toggle('active-page', s.id === id));
     navLinks.forEach(l=>l.classList.toggle('active', l.getAttribute('href') === '#'+id));
+    navLinks.forEach(l=>{ if(l.getAttribute('href') === '#'+id) l.setAttribute('aria-current','page'); else l.removeAttribute('aria-current'); });
     window.scrollTo(0,0);
   }
   navLinks.forEach(l=>{
