@@ -124,7 +124,11 @@
     padding:max(40px, calc(env(safe-area-inset-top, 0px) + 72px)) max(16px, env(safe-area-inset-right, 0px)) max(40px, calc(env(safe-area-inset-bottom, 0px) + 56px)) max(16px, env(safe-area-inset-left, 0px));
   }
   .lightbox.open{display:flex;}
-  .lightbox img{max-width:100%; max-height:100%; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.4);}
+  .lightbox img{max-width:100%; max-height:100%; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.4);
+    pointer-events:none; -webkit-touch-callout:none; -webkit-user-select:none; user-select:none;}
+  .wm-host{position:relative;}
+  .wm-shield{position:absolute; left:0; top:0; z-index:2; opacity:.001; cursor:zoom-in; max-width:none; border-radius:8px;}
+  img.ph{-webkit-user-drag:none;}
   .lightbox-close{
     position:absolute; top:calc(22px + env(safe-area-inset-top, 0px)); right:calc(28px + env(safe-area-inset-right, 0px)); width:44px; height:44px; border-radius:50%;
     background:var(--surface); border:none; color:var(--primary-dark); font-size:1.4rem; font-weight:800;
@@ -282,7 +286,8 @@
   .svc-tabbar button:hover, .svc-tabbar button.active{background:var(--primary-dark); color:var(--on-primary);}
   .svc-panel{display:none; grid-template-columns:1fr 1fr; gap:44px; align-items:center;}
   .svc-panel > *{min-width:0;}
-  .svc-panel.active{display:grid;}
+  .svc-panel.active{display:grid; animation:svc-fade .35s ease both;}
+  @keyframes svc-fade{from{opacity:0;} to{opacity:1;}}
   .svc-panel .photo{aspect-ratio:4/3.3;}
   .svc-panel .photo.wide{grid-column:1/-1; aspect-ratio:21/9;}
   .svc-panel .full{grid-column:1/-1;}
@@ -302,7 +307,16 @@
   .cavity-pair > *{min-width:0;}
   .cavity-pair .photo{aspect-ratio:16/9; margin-bottom:4px;}
   .cavity-pair .eq{text-align:center; font-weight:700; color:var(--ink); margin:0;}
-  .no-share{width:100px; height:auto; display:block; margin:16px auto 0;}
+  .no-share-frame{width:200px; max-width:100%; min-height:0; margin:20px auto 0;}
+  /* Dental trauma and Primary tooth eruption: always one above the other */
+  .forms-columns.tips-stack{grid-template-columns:1fr;}
+  .tips-stack .form-box > .photo{max-width:820px; margin-left:auto; margin-right:auto;}
+  .tips-stack .form-box > h3{text-align:center; font-size:1.7rem; margin-bottom:18px;}
+  .photo.no-share-frame{background:#685292; border-color:#685292;} /* logo purple */
+  .trauma-head{display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; margin-bottom:18px;}
+  .form-box .trauma-head h3{margin-bottom:0; font-size:1.7rem;}
+  .hurt-frame{width:130px; flex:none; min-height:0;}
+  @media (max-width:520px){ .hurt-frame{width:104px;} }
   .trauma-photo{position:relative;}
   .hurt-badge{position:absolute; top:8px; right:8px; width:50px; height:auto; border-radius:8px; border:1px solid var(--line);}
 
@@ -392,6 +406,25 @@
     .forms-intro{padding:22px;}
     nav.tabs a{padding:8px 12px;}
   }
+  /* ---------- Floating icon bubbles (decorative, behind content, peeking in from the page edges) ---------- */
+  section.page{position:relative; overflow:hidden;}
+  section.page > .wrap{position:relative; z-index:1;}
+  .float-layer{position:absolute; inset:0; pointer-events:none; z-index:0; transition:opacity .3s ease;}
+  .float-layer.fading{opacity:0;}
+  .float-bubble{
+    position:absolute; left:0; top:0; width:60px; height:60px; border-radius:50%;
+    background:var(--surface); border:3px solid var(--accent); box-shadow:0 12px 26px rgba(107,78,144,.24), 0 2px 6px rgba(107,78,144,.1);
+    display:flex; align-items:center; justify-content:center;
+    animation:cccd-float var(--d) ease-in-out var(--dl) infinite alternate;
+  }
+  section.page.alt .float-bubble{border-color:var(--accent-dark);}
+  .float-bubble.small{border-width:2px;}
+  .float-bubble img{width:66%; height:66%; display:block;}
+  /* a gentle, slightly quicker bob: up and down only */
+  @keyframes cccd-float{
+    from{transform:translateY(0);}
+    to{transform:translateY(-14px);}
+  }
   /* Scroll reveal: only content below the fold is hidden, and only once JS has armed it */
   html.preload main{opacity:0;}
   /* Page (tab) transitions: quick fade out, then the new page fades in with its content rising */
@@ -404,6 +437,8 @@
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;} .faq-a{transition:none;}
     .reveal{opacity:1; transform:none;}
+    .float-bubble{animation:none;}
+    .svc-panel.active{animation:none;}
     *{transition:none !important;}
   }
 </style>
@@ -489,7 +524,7 @@
           <a href="#services" class="more">Learn more →</a>
         </div>
         <div class="svc-card">
-          <div class="icon-ph has-icon"><img src="images/icon-mouth.svg" alt="" width="144" height="144"></div>
+          <div class="icon-ph has-icon"><img src="images/icon-toothpaste.svg" alt="" width="144" height="144"></div>
           <h3>Prevention</h3>
           <p class="blurb">Dietary counseling</p>
           <a href="#services" class="more">Learn more →</a>
@@ -579,7 +614,7 @@
     </div>
 
     <div class="svc-panel active" data-panel="visit" role="tabpanel" id="panel-visit" aria-labelledby="tab-visit">
-      <div class="photo"><img width="960" height="640" src="images/Infant_1st_visit.jpg" alt="Infant first dental visit" class="ph" loading="lazy" decoding="async"></div>
+      <div class="photo"><img width="960" height="640" src="images/Infant_1st_visit.jpg" alt="Infant first dental visit" class="ph" decoding="async"></div>
       <div>
         <h3>1st Visit</h3>
         <ul>
@@ -594,7 +629,7 @@
     </div>
 
     <div class="svc-panel" data-panel="prevention" role="tabpanel" id="panel-prevention" aria-labelledby="tab-prevention">
-      <div class="photo"><img width="1200" height="1800" src="images/Tooth_Brushing_Itself.JPEG" alt="Child brushing teeth" class="ph" loading="lazy" decoding="async"></div>
+      <div class="photo"><img width="1200" height="1800" src="images/Tooth_Brushing_Itself.JPEG" alt="Child brushing teeth" class="ph" decoding="async"></div>
       <div>
         <h3>Prevention</h3>
         <ul>
@@ -611,21 +646,20 @@
     </div>
 
     <div class="svc-panel" data-panel="sedation" role="tabpanel" id="panel-sedation" aria-labelledby="tab-sedation">
-      <div class="photo"><img width="1146" height="1096" src="images/Dr._Tiff_next_to_chair.jpg" alt="Illustrated dentist standing beside a treatment chair with a smiling tooth" class="ph" loading="lazy" decoding="async"></div>
+      <div class="photo"><img width="1146" height="1096" src="images/Dr._Tiff_next_to_chair.jpg" alt="Illustrated dentist standing beside a treatment chair with a smiling tooth" class="ph" decoding="async"></div>
       <div>
         <h3>Sedation</h3>
         <ul>
           <li>Nitrous oxide (laughing gas)</li>
           <li>Moderate oral sedation</li>
           <li>General anesthesia</li>
-          <li>Composite fillings</li>
           <li>SOAN "no-shot" numbing</li>
         </ul>
       </div>
     </div>
 
     <div class="svc-panel" data-panel="special" role="tabpanel" id="panel-special" aria-labelledby="tab-special">
-      <div class="photo wide"><img width="1800" height="1251" src="images/Dental_Storyboard.jpeg" alt="Going to the Dentist social story for special needs patients" class="ph" loading="lazy" decoding="async"></div>
+      <div class="photo wide"><img width="1800" height="1251" src="images/Dental_Storyboard.jpeg" alt="Going to the Dentist social story for special needs patients" class="ph" decoding="async"></div>
       <div class="full">
         <h3>Special Needs</h3>
         <ul>
@@ -671,19 +705,21 @@
           </div>
         </div>
         <p>These bacteria can be passed on to others through saliva, just like cold germs can — please don't share cups, forks, spoons, or toothbrushes.</p>
-        <img width="150" height="200" src="images/no_sharing.png" alt="No sharing utensils icon" class="no-share">
+        <div class="photo no-share-frame"><img width="150" height="200" src="images/no_sharing.png" alt="No sharing utensils icon" class="ph"></div>
       </div>
-    <div class="forms-columns" style="margin-top:28px;">
+    <div class="forms-columns tips-stack" style="margin-top:28px;">
+      <div class="form-box">
+        <div class="trauma-head">
+          <h3>Dental trauma</h3>
+          <div class="photo hurt-frame"><img width="1145" height="1250" src="images/Hurt_Tooth.jpg" alt="Hurt tooth illustration" class="ph"></div>
+        </div>
+        <div class="photo trauma-photo" style="aspect-ratio:16/10;">
+          <img width="1000" height="363" src="images/trauma_chart.png" alt="Dental trauma guide" class="ph" style="height:auto; width:100%;">
+        </div>
+      </div>
       <div class="form-box">
         <h3>Primary tooth eruption</h3>
         <div class="photo" style="aspect-ratio:16/10;"><img width="500" height="326" src="images/tooth_eruption_chart.png" alt="Primary tooth eruption guide" class="ph"></div>
-      </div>
-      <div class="form-box">
-        <h3>Dental trauma</h3>
-        <div class="photo trauma-photo" style="aspect-ratio:16/10;">
-          <img width="1000" height="363" src="images/trauma_chart.png" alt="Dental trauma guide" class="ph" style="height:auto; width:100%;">
-          <img width="1145" height="1250" src="images/Hurt_Tooth.jpg" alt="Hurt tooth illustration" class="hurt-badge">
-        </div>
       </div>
     </div>
   </div>
@@ -780,10 +816,9 @@
         <div class="contact-line"><span aria-hidden="true">📠</span> 925.357.3777 <span style="color:var(--ink-soft); font-size:.85rem;">(fax)</span></div>
         <div class="social-row">
           <a href="https://www.instagram.com/cccdentistry/" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">IG</a>
-          <a href="#" title="Facebook" aria-label="Facebook" data-placeholder-link>FB</a>
-          <a href="#" title="TikTok" aria-label="TikTok" data-placeholder-link>TT</a>
+          <a href="https://www.facebook.com/contracostadentistry" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook">FB</a>
+          <a href="https://www.tiktok.com/@cccdentistry?_r=1&amp;_t=ZP-9BfEhkcxcSs" target="_blank" rel="noopener" title="TikTok" aria-label="TikTok">TT</a>
         </div>
-        <span class="draft-tag">✎ Instagram handle taken from in-office signage (@cccdentistry) — confirm. Facebook / TikTok URLs still needed.</span>
       </div>
     </div>
   </div>
@@ -852,6 +887,7 @@
       img.replaceWith(span);
       return;
     }
+    if(img.__shield){ img.__shield.remove(); img.__shield = null; }
     const box = img.closest('.photo');
     const tag = document.createElement('span');
     tag.className = 'tag';
@@ -892,6 +928,7 @@
   function setTourMissing(missing){
     tourViewer.classList.toggle('missing', missing);
     tourImg.hidden = missing;
+    if(window.__cccdFitShield) window.__cccdFitShield(tourImg);
     tourMissing.hidden = !missing;
     if(missing) tourMissing.textContent = 'PHOTO — ' + STOPS[tourIndex].img;
   }
@@ -906,7 +943,7 @@
     tourImg.alt = s.alt;
     tourImg.setAttribute('aria-label', 'View full-size image: ' + s.alt);
     if(tourImg.complete && tourImg.naturalWidth === 0) setTourMissing(true);
-    if(window.__cccdPrewarm) window.__cccdPrewarm(s.img).catch(() => {});
+    if(window.__cccdShieldFor) window.__cccdShieldFor(tourImg);
     tourTitle.innerHTML = s.title ? s.title.replace('&', '&amp;') : '&nbsp;';
     tourNote.textContent = s.note || ' ';
     restartTimer();
@@ -931,12 +968,16 @@
   setPauseUI();
   // Autoplay no longer pauses on hover or focus; the pause/play button is the only way to stop it.
 
-  /* ---------- Watermark: invisible while browsing, baked in only at the moment
-     someone tries to save/drag an image (right-click or drag), reverted right after ---------- */
+  /* ---------- Image protection ----------
+     Every zoomable photo gets an invisible "shield" image laid exactly over it. Right-click "Save image",
+     long-press "Save to Photos" (iPhone/Android) and drag-to-desktop all grab the shield, which holds a
+     copy of the photo with the practice logo baked in. Until that copy is ready the shield is a blank pixel,
+     so the clean original is never what gets saved. Works the same in every browser and on every device. */
   (function(){
     const LOGO_SRC = 'images/cccd_logo.jpg';
+    const BLANK_PX = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+    const MAX_SIDE = 2000; // saved copies are capped at this size too
     const cache = new Map();
-    let logoImg = null;
     function loadImg(src){
       return new Promise((res, rej) => {
         const im = new Image();
@@ -946,50 +987,230 @@
         im.src = src;
       });
     }
+    const logoReady = loadImg(LOGO_SRC);
     function watermark(src){
-      if(cache.has(src)) return Promise.resolve(cache.get(src));
-      return loadImg(src).then(im => {
+      if(cache.has(src)) return cache.get(src);
+      const job = logoReady.then(logo => loadImg(src).then(im => {
+        const k = Math.min(1, MAX_SIDE / Math.max(im.naturalWidth, im.naturalHeight));
         const c = document.createElement('canvas');
-        c.width = im.naturalWidth; c.height = im.naturalHeight;
+        c.width = Math.round(im.naturalWidth * k); c.height = Math.round(im.naturalHeight * k);
         const ctx = c.getContext('2d');
-        ctx.drawImage(im, 0, 0);
+        ctx.drawImage(im, 0, 0, c.width, c.height);
         const lw = Math.max(70, c.width * 0.16);
-        const lh = lw * (logoImg.naturalHeight / logoImg.naturalWidth);
+        const lh = lw * (logo.naturalHeight / logo.naturalWidth);
         ctx.globalAlpha = 0.25;
         for(let y = -lh; y < c.height + lh; y += lh * 2.1){
           for(let x = -lw; x < c.width + lw; x += lw * 2.1){
-            ctx.drawImage(logoImg, x, y, lw, lh);
+            ctx.drawImage(logo, x, y, lw, lh);
           }
         }
         ctx.globalAlpha = 1;
-        const url = c.toDataURL('image/jpeg', 0.92);
-        cache.set(src, url);
-        return url;
-      });
+        return c.toDataURL('image/jpeg', 0.9);
+      }));
+      job.catch(() => {});
+      cache.set(src, job);
+      return job;
     }
-    let revertTimer = null;
-    function armSwap(img){
-      const orig = img.getAttribute('data-orig') || img.getAttribute('src');
-      if(!img.getAttribute('data-orig')) img.setAttribute('data-orig', orig);
-      watermark(orig).then(url => { img.src = url; }).catch(() => {});
-      clearTimeout(revertTimer);
-      revertTimer = setTimeout(() => { img.src = orig; }, 4000);
+    function fit(img){
+      const sh = img.__shield;
+      if(!sh) return;
+      if(!img.isConnected){ sh.remove(); return; }
+      const w = img.offsetWidth, h = img.offsetHeight;
+      if(!w || !h || img.hidden){ sh.style.display = 'none'; return; }
+      sh.style.display = 'block';
+      sh.style.left = img.offsetLeft + 'px'; sh.style.top = img.offsetTop + 'px';
+      sh.style.width = w + 'px'; sh.style.height = h + 'px';
     }
-    function revert(img){
-      const orig = img.getAttribute('data-orig');
-      if(orig) img.src = orig;
-      clearTimeout(revertTimer);
+    const ro = 'ResizeObserver' in window ? new ResizeObserver(es => es.forEach(e => fit(e.target))) : null;
+    function shieldFor(img){
+      if(!img || !img.isConnected) return;
+      let sh = img.__shield;
+      if(!sh){
+        sh = document.createElement('img');
+        sh.className = 'wm-shield';
+        sh.alt = ''; sh.setAttribute('aria-hidden', 'true');
+        sh.__img = img; img.__shield = sh;
+        img.draggable = false;
+        img.parentElement.classList.add('wm-host');
+        img.after(sh);
+        if(ro) ro.observe(img);
+      }
+      const src = img.getAttribute('src');
+      sh.dataset.for = src;
+      sh.src = BLANK_PX;
+      watermark(src).then(url => { if(sh.dataset.for === src) sh.src = url; }).catch(() => {});
+      fit(img);
     }
-    loadImg(LOGO_SRC).then(im => {
-      logoImg = im;
-      document.querySelectorAll('img.ph').forEach(img => watermark(img.getAttribute('src')).catch(() => {}));
-      window.__cccdPrewarm = watermark;
-      document.addEventListener('contextmenu', (e) => { if(e.target.matches('img.ph')) armSwap(e.target); }, true);
-      document.addEventListener('dragstart', (e) => { if(e.target.matches('img.ph')) armSwap(e.target); }, true);
-      document.addEventListener('dragend', (e) => { if(e.target.matches('img.ph')) revert(e.target); }, true);
-      document.querySelectorAll('img.ph').forEach(img => img.addEventListener('mouseleave', () => revert(img)));
-    }).catch(() => {});
+    window.__cccdShieldFor = shieldFor;
+    window.__cccdFitShield = fit;
+    document.querySelectorAll('img.ph').forEach(shieldFor);
+    window.addEventListener('resize', () => document.querySelectorAll('img.ph').forEach(fit));
+    // the clean originals can't be dragged out, and the full-size viewer offers nothing to save
+    document.addEventListener('dragstart', e => { if(e.target.matches && e.target.matches('img.ph, #lightboxImg')) e.preventDefault(); }, true);
   })();
+
+  /* ---------- Floating icon bubbles ----------
+     Each bubble gets its own size and a scattered "wish" spot. Before showing, it is moved to the
+     nearest open spot where nothing on the page overlaps it (and it covers nothing), shrinking if needed. */
+  const FLOAT_ICONS = ['tooth','star','toothpaste','sun','heart','apple','mouthwash','glass','girl','droplet','mouth','floss','cup','tools','boy'];
+  const FLOAT_SIZES = [124, 74, 100, 66, 112, 84, 94, 70, 106];
+  const FLOAT_AVOID = 'a, button, img, iframe, .photo, .svc-card, .testi-card, .doc-card, .form-box, .forms-intro, .info-block, .map-block, .slide-viewer, .family-band, .faq-item, .svc-tabbar, h1, h2, h3, p, li, td, .eyebrow, .stars, .draft-tag, .rename-note';
+  const FLOAT_TEXT = 'h1, h2, h3, p, li, td, .eyebrow, .draft-tag, .rename-note';
+  const RISE = 14;            // matches the float animation
+  const CELL = 8;             // placement grid
+  const frac = n => n - Math.floor(n);
+  (function(){
+    let k = 0;
+    document.querySelectorAll('section.page').forEach((sec, si) => {
+      const layer = document.createElement('div');
+      layer.className = 'float-layer';
+      layer.setAttribute('aria-hidden', 'true');
+      const n = (sec.id === 'faq' || sec.id === 'referring' || sec.id === 'contact') ? 7 : 10;
+      for(let i = 0; i < n; i++){
+        const b = document.createElement('div');
+        b.className = 'float-bubble';
+        b.hidden = true;
+        // scattered wish spot: spread down the page, random-looking but stable across visits
+        b.dataset.px = (0.06 + 0.88 * frac(Math.sin(i * 12.9898 + si * 78.233) * 43758.5453)).toFixed(3);
+        b.dataset.py = ((i + 0.5) / n).toFixed(3);
+        b.dataset.size = FLOAT_SIZES[(i * 4 + si) % FLOAT_SIZES.length];
+        b.style.setProperty('--d', (2.2 + ((i * 7 + si * 3) % 7) * 0.2).toFixed(2) + 's');
+        b.style.setProperty('--dl', (-((i * 5 + si) % 9) * 0.3).toFixed(2) + 's');
+        const img = document.createElement('img');
+        img.src = 'images/icon-' + FLOAT_ICONS[k++ % FLOAT_ICONS.length] + '.svg';
+        img.alt = ''; img.width = 144; img.height = 144;
+        b.appendChild(img);
+        layer.appendChild(b);
+      }
+      sec.prepend(layer);
+    });
+  })();
+
+  function placeBubbles(sec){
+    if(!sec || !sec.classList.contains('active-page')) return;
+    const layer = sec.querySelector('.float-layer');
+    if(!layer) return;
+    const sr = sec.getBoundingClientRect();
+    const W = sec.offsetWidth, H = sec.offsetHeight;
+    const cols = Math.ceil(W / CELL), rows = Math.ceil(H / CELL);
+    const grid = new Uint8Array(cols * rows);
+    const mark = (l, t, r, b) => {
+      const c0 = Math.max(0, Math.floor(l / CELL)), c1 = Math.min(cols - 1, Math.floor(r / CELL));
+      const r0 = Math.max(0, Math.floor(t / CELL)), r1 = Math.min(rows - 1, Math.floor(b / CELL));
+      for(let y = r0; y <= r1; y++) grid.fill(1, y * cols + c0, y * cols + c1 + 1);
+    };
+    // everything on the page a bubble must keep clear of (text by its actual lines, so short lines leave room)
+    const PAD = 14;
+    const narrow = W < 700;
+    sec.querySelectorAll(FLOAT_AVOID).forEach(el => {
+      if(layer.contains(el) || el.offsetParent === null) return;
+      let rects;
+      if(el.matches(FLOAT_TEXT)){ const rg = document.createRange(); rg.selectNodeContents(el); rects = [...rg.getClientRects()]; }
+      else rects = [el.getBoundingClientRect()];
+      const rising = el.closest('.reveal:not(.in)') ? 18 : 0; // still sliding up into place
+      rects.forEach(r => { if(r.width && r.height) mark(r.left - sr.left - PAD, r.top - sr.top - PAD - rising, r.right - sr.left + PAD, r.bottom - sr.top + PAD); });
+    });
+    // keep off the section's very edges
+    mark(0, 0, W, 6); mark(0, H - 6, W, H); mark(0, 0, 6, H); mark(W - 6, 0, W, H);
+
+    let sum;
+    const buildSum = () => {
+      sum = new Int32Array((cols + 1) * (rows + 1));
+      for(let y = 0; y < rows; y++){
+        let run = 0;
+        for(let x = 0; x < cols; x++){
+          run += grid[y * cols + x];
+          sum[(y + 1) * (cols + 1) + x + 1] = sum[y * (cols + 1) + x + 1] + run;
+        }
+      }
+    };
+    const busy = (c0, r0, c1, r1) => sum[(r1 + 1) * (cols + 1) + c1 + 1] - sum[r0 * (cols + 1) + c1 + 1] - sum[(r1 + 1) * (cols + 1) + c0] + sum[r0 * (cols + 1) + c0];
+    buildSum();
+
+    const bubbles = [...layer.querySelectorAll('.float-bubble')];
+    let shown = 0;
+    bubbles.forEach((bub, i) => {
+      const base = +bub.dataset.size * (narrow ? 0.8 : 1);
+      // shrink a little to fit a nearby gap, but never below 60px; the 48px size is only a last resort to reach three
+      const tries = [base, base * 0.82, base * 0.66].map(v => Math.max(60, Math.round(v)));
+      const px = +bub.dataset.px * W, py = +bub.dataset.py * H;
+      // Stay near the wish spot (so bubbles stay spread down the page), shrinking to fit a nearby gap;
+      // only wander far away when that's the only way to get three bubbles showing.
+      const near = Math.max(170, H * 0.12);
+      let spot = null, fallback = null;
+      for(const size of tries){
+        const n = Math.ceil(size / CELL), rise = Math.ceil(RISE / CELL);
+        let best = null, bestD = Infinity;
+        for(let r = rise; r + n <= rows; r++){
+          for(let c = 0; c + n <= cols; c++){
+            if(busy(c, r - rise, c + n - 1, r + n - 1)) continue;
+            const dx = c * CELL + size / 2 - px, dy = r * CELL + size / 2 - py;
+            const d = dx * dx + dy * dy * 1.5;
+            if(d < bestD){ bestD = d; best = {x:c * CELL, y:r * CELL, size, dy:Math.abs(dy)}; }
+          }
+        }
+        if(best && best.dy <= near){ spot = best; break; }
+        if(best && !fallback) fallback = best;
+      }
+      if(!spot && shown < 3){
+        spot = fallback;
+        if(!spot){
+          const n = 6, rise = Math.ceil(RISE / CELL); let bestD = Infinity;
+          for(let r = rise; r + n <= rows; r++) for(let c = 0; c + n <= cols; c++){
+            if(busy(c, r - rise, c + n - 1, r + n - 1)) continue;
+            const dx = c * CELL + 24 - px, dy = r * CELL + 24 - py, d = dx * dx + dy * dy;
+            if(d < bestD){ bestD = d; spot = {x:c * CELL, y:r * CELL, size:48}; }
+          }
+        }
+      }
+      if(!spot){ bub.hidden = true; return; }
+      bub.hidden = false;
+      bub.style.left = spot.x + 'px';
+      bub.style.top = spot.y + 'px';
+      bub.style.width = bub.style.height = spot.size + 'px';
+      bub.classList.toggle('small', spot.size < 60);
+      // reserve this bubble's space (plus a gap) so others don't crowd it
+      mark(spot.x - 18, spot.y - RISE - 18, spot.x + spot.size + 18, spot.y + spot.size + 18);
+      buildSum();
+      shown++;
+    });
+  }
+
+  // Re-place bubbles; if any of them has to move, fade them out, move them, and fade them back in.
+  const bubbleState = b => [b.hidden, b.style.top, b.style.left, b.style.width].join('|');
+  const setBubbleState = (b, st) => {
+    const [hid, top, left, w] = st.split('|');
+    b.hidden = hid === 'true'; b.style.top = top; b.style.left = left; b.style.width = b.style.height = w;
+    b.classList.toggle('small', parseFloat(w) < 60);
+  };
+  let fadeTimer = null;
+  function placeActiveBubbles(){
+    const sec = document.querySelector('section.page.active-page');
+    const layer = sec && sec.querySelector('.float-layer');
+    if(!layer) return;
+    const bubbles = [...layer.querySelectorAll('.float-bubble')];
+    const before = bubbles.map(bubbleState);
+    placeBubbles(sec);
+    const after = bubbles.map(bubbleState);
+    if(after.every((st, i) => st === before[i])) return;
+    if(!revealOK) return; // reduced motion: just move them
+    bubbles.forEach((b, i) => setBubbleState(b, before[i])); // stay put while fading out
+    clearTimeout(fadeTimer);
+    layer.classList.add('fading');
+    fadeTimer = setTimeout(() => {
+      bubbles.forEach((b, i) => setBubbleState(b, after[i]));
+      requestAnimationFrame(() => requestAnimationFrame(() => layer.classList.remove('fading')));
+    }, 300);
+  }
+  let bubbleTimer = null;
+  const queueBubbles = () => { clearTimeout(bubbleTimer); bubbleTimer = setTimeout(placeActiveBubbles, 120); };
+  window.addEventListener('resize', queueBubbles);
+  if('ResizeObserver' in window){
+    const ro = new ResizeObserver(queueBubbles);
+    document.querySelectorAll('section.page > .wrap').forEach(w => ro.observe(w));
+  }
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(queueBubbles);
+  window.addEventListener('load', queueBubbles);
 
   /* ---------- Services tabs (WAI-ARIA tablist with arrow keys) ---------- */
   const svcTabs = [...document.querySelectorAll('.svc-tabbar [role="tab"]')];
@@ -997,6 +1218,7 @@
     svcTabs.forEach(b => { const on = b === btn; b.classList.toggle('active', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; });
     document.querySelectorAll('.svc-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === btn.dataset.tab));
     if(focus) btn.focus();
+    if(typeof queueBubbles === 'function') queueBubbles();
   }
   svcTabs.forEach((btn, i) => {
     btn.addEventListener('click', () => selectSvcTab(btn));
@@ -1022,7 +1244,7 @@
 
   /* ---------- Page router (tabs act as separate pages, not scroll) ---------- */
   /* ---------- Smooth reveal on scroll ---------- */
-  const REVEAL_SEL = '.addr-line, .hero-grid > *, .tour-head, .slideshow, .cards4 > *, .family-band, .page-kicker, .contact-jump, .doc-card, .svc-tabbar, .svc-panel, .forms-intro, .forms-photo, .form-box, .forms-columns.single > .photo, .contact-grid > *, .faq-item';
+  const REVEAL_SEL = '.addr-line, .hero-grid > *, .tour-head, .slideshow, .cards4 > *, .family-band, .page-kicker, .contact-jump, .doc-card, .svc-tabbar, .forms-intro, .forms-photo, .form-box, .forms-columns.single > .photo, .contact-grid > *, .faq-item';
   const revealOK = 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const revealObs = revealOK ? new IntersectionObserver((entries) => {
     entries.forEach(en => {
@@ -1104,6 +1326,8 @@
         armReveal(next);
       }
       if(id === 'home') restartTimer(); else clearTimeout(tourTimer);
+      requestAnimationFrame(() => placeBubbles(next));
+      queueBubbles();
     };
     if(prev && revealOK){
       clearTimeout(tourTimer);
@@ -1161,7 +1385,7 @@
     if(lastFocused) lastFocused.focus();
   }
   document.addEventListener('click', (e)=>{
-    const img = e.target.closest('img.ph');
+    const img = e.target.closest('img.ph') || (e.target.classList && e.target.classList.contains('wm-shield') ? e.target.__img : null);
     if(img && !img.hidden){ openLightbox(img); return; }
     if(e.target === lightbox || e.target === lightboxClose){ closeLightbox(); }
   });
